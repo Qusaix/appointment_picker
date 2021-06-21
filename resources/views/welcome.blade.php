@@ -38,6 +38,8 @@
       start: '2021-06-21'
     }
 ]
+    let startDate;
+    let calendarModel;
     document.addEventListener('DOMContentLoaded', function() {
       var calendarEl = document.getElementById('calendar');
       var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -46,18 +48,31 @@
         selectable:true,
         events: events,
         select:function(start,end,allDays){
+            $('#exampleModal').modal('show');
             eventData = {
                         title:'title',
                         start: start.startStr,
                  };
 
-                 calendar.addEvent( eventData )
+                 startDate = start.startStr;
 
+            calendarModel = calendar;
         }
 
       });
       calendar.render();
     });
+
+    function addNewEvent(start)
+      {
+        calendarModel.addEvent({
+            title:document.getElementById("name").value,
+            start:startDate
+        })
+        document.getElementById("name").value = "";
+        $('#exampleModal').modal('hide');
+      }
+
 
   </script>
 </head>
@@ -74,7 +89,7 @@
       <ul>
         <li class="active"><a href="#hero"><i class="bx bx-home"></i> <span>Home</span></a></li>
         <li><a href="#about"><i class="bx bx-user"></i> <span>About</span></a></li>
-        <li><a href="#appoinments"><i class="bx bx-envelope"></i> <span>Appoinments</span></a></li>
+        <li><a href="#appoinments"><i class="bx bx-book"></i> <span>Appoinments</span></a></li>
         <li><a href="#portfolio"><i class="bx bx-book-content"></i> <span>Portfolio</span></a></li>
         <li><a href="#services"><i class="bx bx-server"></i> <span>Services</span></a></li>
         <li><a href="#contact"><i class="bx bx-envelope"></i> <span>Contact</span></a></li>
@@ -101,7 +116,7 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+              <h5 class="modal-title" id="exampleModalLabel">New appointment</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -110,47 +125,47 @@
               <form>
                 <div class="form-group">
                   <label for="recipient-name" class="col-form-label">Name:</label>
-                  <input type="text" class="form-control" id="recipient-name">
+                  <input type="text" class="form-control" id="name">
                 </div>
                 <div class="form-group">
                     <label for="recipient-name" class="col-form-label">Instgrame:</label>
-                    <input type="text" class="form-control" id="recipient-name">
+                    <input type="text" class="form-control" id="Instgrame_input">
                 </div>
                 <div class="form-group">
                     <label for="recipient-name" class="col-form-label">Time:</label>
-                    <select class="form-control" id="exampleFormControlSelect1">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                        <option>6</option>
-                        <option>7</option>
-                        <option>8</option>
-                        <option>9</option>
-                        <option>10</option>
-                        <option>11</option>
-                        <option>12</option>
+                    <select class="form-control" id="time">
+                        <option value="1">1</option>
+                        <option value="1">2</option>
+                        <option value="1">3</option>
+                        <option value="1">4</option>
+                        <option value="1">5</option>
+                        <option value="1">6</option>
+                        <option value="1">7</option>
+                        <option value="1">8</option>
+                        <option value="1">9</option>
+                        <option value="1">10</option>
+                        <option value="1">11</option>
+                        <option value="1">12</option>
                       </select>
                   
                 </div>
                 <div class="form-group">
                     <label for="message-text" class="col-form-label">AM/PM:</label>
                     <select class="form-control" id="exampleFormControlSelect1">
-                        <option>AM</option>
-                        <option>PM</option>
+                        <option value="am">AM</option>
+                        <option value="pm">PM</option>
                         
                       </select>
                   </div>
                 <div class="form-group">
                   <label for="message-text" class="col-form-label">Note:</label>
-                  <textarea class="form-control" id="message-text"></textarea>
+                  <textarea class="form-control" id="note"></textarea>
                 </div>
               </form>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Send message</button>
+              <button onclick="addNewEvent(startDate)" type="button" class="btn btn-primary">Add</button>
             </div>
           </div>
         </div>
