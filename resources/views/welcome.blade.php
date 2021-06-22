@@ -93,10 +93,10 @@
             title:document.getElementById("name").value,
             start:startDate,
             name:document.getElementById("name").value,
-            instgrame:document.getElementById("Instgrame_input").value,
+            instgrame:document.getElementById("Instagram_input").value,
             time:startDate,
             AM:document.getElementById("dayNight").value,
-            note:document.getElementById("Instgrame_input").value
+            note:document.getElementById("Instagram_input").value
         }
         $.ajax({
             url: "{{route('appointment.store')}}",
@@ -107,15 +107,20 @@
                 title:document.getElementById("name").value,
                 start:startDate,
                 name:document.getElementById("name").value,
-                instgrame:document.getElementById("Instgrame_input").value,
+                instgrame:document.getElementById("Instagram_input").value,
                 time:startDate,
                 am:document.getElementById("dayNight").value,
-                note:document.getElementById("Instgrame_input").value
+                note:document.getElementById("Instagram_input").value
             },
             dataType: 'JSON',
             success: function (res) { 
-                    console.log('add event response: ',res.errors) 
-                    if(res.status == 200)
+                    if(res.status == 202)
+                    {
+                      alert(res.err);
+                      $('#exampleModal').modal('hide');
+                      return;
+                    }
+                    if(res.status == 201)
                     {
                         calendarModel.addEvent({
                             title:document.getElementById("name").value,
@@ -123,7 +128,7 @@
                         })
                         $('#exampleModal').modal('hide');
                         document.getElementById("name").value = "";
-                        document.getElementById("Instgrame_input").value = "";
+                        document.getElementById("Instagram_input").value = "";
                         document.getElementById("dayNight").value = "";
                         document.getElementById("note").value = "";
                     }
@@ -132,9 +137,11 @@
               $('#exampleModal').modal('hide')
               $('#exampleModal2').modal('show')
             }
-        }); 
+        });
+        
         
     }
+    
 
   </script>
 </head>
@@ -165,6 +172,9 @@
     <div class="container" data-aos="zoom-in" data-aos-delay="100">
       <h1>Salem sulibe</h1>
       <p>I'm <span class="typed" data-typed-items="Freelancer, Photographer"></span></p>
+      <button type="button" class="btn btn-dark" style="background-color: #45505b">
+        <a href="#appoinments" style="color: #ffff;  scroll-behavior: smooth; transition: 0.3s;">Make an appointment now!</a>
+      </button>
       <div class="social-links">
         <!-- <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a> -->
         <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
@@ -212,8 +222,12 @@
                   <input type="text" class="form-control" id="name">
                 </div>
                 <div class="form-group">
-                    <label for="recipient-name" class="col-form-label">Instgrame:</label>
-                    <input type="text" class="form-control" id="Instgrame_input">
+                  <label for="validationCustom05" class="col-form-label">Phone Number:</label>
+                  <input type="number" class="form-control" id="phone">
+                </div>
+                <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Instagram:</label>
+                    <input type="text" class="form-control" id="Instagram_input">
                 </div>
                 <div class="form-group">
                     <label for="recipient-name" class="col-form-label">Time:</label>
