@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
 
   <title>Prototype for salem project</title>
   <meta content="" name="description">
@@ -32,6 +33,24 @@
   
 <script>
 
+    (() => {
+        'use strict';
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll('.needs-validation');
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms).forEach((form) => {
+            form.addEventListener('submit', (event) => {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+            }, false);
+        });
+    })();
+
     let events = [ {
       id: 'a',
       title: 'my event',
@@ -46,7 +65,7 @@
         editable: false,
         initialView: 'dayGridMonth',
         selectable:true,
-        events: events,
+        events: {!! json_encode($formatedAppointments) !!},
         select:function(start,end,allDays){
             $('#exampleModal').modal('show');
             eventData = {
@@ -65,15 +84,57 @@
     });
 
     function addNewEvent(start)
-      {
-        calendarModel.addEvent({
+    {
+        let newEvent = {
             title:document.getElementById("name").value,
-            start:startDate
-        })
-        document.getElementById("name").value = "";
-        $('#exampleModal').modal('hide');
-      }
-
+            start:startDate,
+        }
+        let dataSaved = {
+            title:document.getElementById("name").value,
+            start:startDate,
+            name:document.getElementById("name").value,
+            instgrame:document.getElementById("Instgrame_input").value,
+            time:startDate,
+            AM:document.getElementById("dayNight").value,
+            note:document.getElementById("Instgrame_input").value
+        }
+        $.ajax({
+            url: "{{route('appointment.store')}}",
+            type: 'POST',
+            data: {
+                _token: "{{ csrf_token() }}",
+                appointment:dataSaved,
+                title:document.getElementById("name").value,
+                start:startDate,
+                name:document.getElementById("name").value,
+                instgrame:document.getElementById("Instgrame_input").value,
+                time:startDate,
+                am:document.getElementById("dayNight").value,
+                note:document.getElementById("Instgrame_input").value
+            },
+            dataType: 'JSON',
+            success: function (res) { 
+                    console.log('add event response: ',res.errors) 
+                    if(res.status == 200)
+                    {
+                        calendarModel.addEvent({
+                            title:document.getElementById("name").value,
+                            start:startDate
+                        })
+                        $('#exampleModal').modal('hide');
+                        document.getElementById("name").value = "";
+                        document.getElementById("Instgrame_input").value = "";
+                        document.getElementById("dayNight").value = "";
+                        document.getElementById("note").value = "";
+                    }
+            },
+            error: function(err){
+              $('#exampleModal').modal('hide')
+              $('#exampleModal2').modal('show')
+            }
+        }); 
+        
+    }
 
   </script>
 </head>
@@ -114,6 +175,27 @@
   <!-- End Hero -->
 
   <main id="main">
+    <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModal2Label" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModal2Label">Error</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>
+                  Please fill all the fields
+              </p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+            </div>
+          </div>
+        </div>
+      </div>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -124,9 +206,9 @@
               </button>
             </div>
             <div class="modal-body">
-              <form>
+              <form class="needs-validation">
                 <div class="form-group">
-                  <label for="recipient-name" class="col-form-label">Name:</label>
+                  <label for="validationCustom05" class="col-form-label">Name:</label>
                   <input type="text" class="form-control" id="name">
                 </div>
                 <div class="form-group">
@@ -137,25 +219,25 @@
                     <label for="recipient-name" class="col-form-label">Time:</label>
                     <select class="form-control" id="time">
                         <option value="1">1</option>
-                        <option value="1">2</option>
-                        <option value="1">3</option>
-                        <option value="1">4</option>
-                        <option value="1">5</option>
-                        <option value="1">6</option>
-                        <option value="1">7</option>
-                        <option value="1">8</option>
-                        <option value="1">9</option>
-                        <option value="1">10</option>
-                        <option value="1">11</option>
-                        <option value="1">12</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
                       </select>
                   
                 </div>
                 <div class="form-group">
                     <label for="message-text" class="col-form-label">AM/PM:</label>
-                    <select class="form-control" id="exampleFormControlSelect1">
-                        <option value="am">AM</option>
-                        <option value="pm">PM</option>
+                    <select class="form-control" id="dayNight">
+                        <option value="0">AM</option>
+                        <option value="1">PM</option>
                         
                       </select>
                   </div>
@@ -218,6 +300,9 @@
     <!-- ======= Facts Section ======= -->
     <section id="appoinments" class="facts">
       <div class="container" data-aos="fade-up">
+        <h3>
+          Make an Appoinments
+        </h3>
         <div id='calendar'></div>
         </div>
 
