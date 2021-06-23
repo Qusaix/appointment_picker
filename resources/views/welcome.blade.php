@@ -64,6 +64,8 @@
       var calendar = new FullCalendar.Calendar(calendarEl, {
         editable: false,
         initialView: 'dayGridMonth',
+        initialDate: '2020-06-01',
+        hiddenDays: [ 2, 4 ],
         selectable:true,
         events: {!! json_encode($formatedAppointments) !!},
         select:function(start,end,allDays){
@@ -76,8 +78,11 @@
                  startDate = start.startStr;
 
             calendarModel = calendar;
-        }
-
+        },
+        validRange: {
+          start: '2020-06-01',
+          end: '2020-07-31'
+       }
       });
     //   calendar.setOption('locale', 'ar');
       calendar.render();
