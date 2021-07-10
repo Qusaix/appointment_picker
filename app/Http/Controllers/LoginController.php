@@ -17,11 +17,18 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
         if(Auth::attempt($credentials))
         {
-            return 'your in';
+            return redirect()->route('dashboard');
         }
         else
         {
             return 'please enter the right cred';
         }
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+
+        return redirect('/');
     }
 }

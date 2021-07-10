@@ -18,7 +18,7 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="{{asset('dashboard/css/sb-admin-2.min.css')}}" rel="stylesheet">
 
 </head>
 
@@ -41,7 +41,7 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
-                                    <form method="POST" action="{{route('dashboard.login')}}" class="user">
+                                    <form method="POST" action="{{route('loginButton')}}" class="user">
                                         @csrf
                                         <div class="form-group">
                                             <input name="email" type="email" class="form-control form-control-user"
@@ -85,10 +85,10 @@
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    {{-- <script src="vendor/jquery-easing/jquery.easing.min.js"></script> --}}
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    {{-- <script src="js/sb-admin-2.min.js"></script> --}}
+    <script src="js/sb-admin-2.min.js"></script>
 
 </body>
 
