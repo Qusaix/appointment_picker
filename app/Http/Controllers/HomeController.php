@@ -8,7 +8,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $name = "Qusai";
+        $name = "Salem";
         $appointments = Appointment::get();
         $formatedAppointments = [];
         foreach($appointments as $ap)

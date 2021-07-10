@@ -26,7 +26,7 @@ class AppointmentsRequest extends FormRequest
         return [
             'name' => 'required',
             'instgrame' => 'required',
-            'am' => 'required',
+            'AM' => 'required',
             'note' => 'required',
         ];
     }

@@ -65,8 +65,15 @@
         editable: false,
         initialView: 'dayGridMonth',
         initialDate: '2020-06-01',
-        hiddenDays: [ 2, 4 ],
+        eventLimit: 1,
+        isRTL: true, // for all non-TimeGrid views
+        hiddenDays: [ 2, 5 ],
         selectable:true,
+        views: {
+          timeGridMonth: {
+           dayMaxEventRows: 2 // adjust to 6 only for timeGridWeek/timeGridDay
+          }
+        },
         events: {!! json_encode($formatedAppointments) !!},
         select:function(start,end,allDays){
             $('#exampleModal').modal('show');
@@ -84,7 +91,7 @@
           end: '2020-07-31'
        }
       });
-    //   calendar.setOption('locale', 'ar');
+      // calendar.setOption('locale', 'ar');
       calendar.render();
     });
 
@@ -101,22 +108,13 @@
             instgrame:document.getElementById("Instagram_input").value,
             time:startDate,
             AM:document.getElementById("dayNight").value,
-            note:document.getElementById("Instagram_input").value
+            note:document.getElementById("Instagram_input").value,
+            _token: "{{ csrf_token() }}",
         }
         $.ajax({
             url: "{{route('appointment.store')}}",
             type: 'POST',
-            data: {
-                _token: "{{ csrf_token() }}",
-                appointment:dataSaved,
-                title:document.getElementById("name").value,
-                start:startDate,
-                name:document.getElementById("name").value,
-                instgrame:document.getElementById("Instagram_input").value,
-                time:startDate,
-                am:document.getElementById("dayNight").value,
-                note:document.getElementById("Instagram_input").value
-            },
+            data: dataSaved,
             dataType: 'JSON',
             success: function (res) { 
                     if(res.status == 202)
