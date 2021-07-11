@@ -16,4 +16,9 @@ Route::post('loginButton',[LoginController::class,'login'])->name('loginButton')
 Route::prefix('dashboard')->middleware('auth')->group(function(){
     Route::get('home',[DashboardController::class,'index'])->name('dashboard');
     Route::post('logout',[LoginController::class,'logout'])->name('dashboad.logout');
+    
+    Route::prefix('appointment')->group(function(){
+        Route::get('/',[AppointmentsController::class,'index'])->name('dashboard.appointment.index');
+        Route::get('datatable',[AppointmentsController::class,'datatable'])->name('dashboard.appointment.datatable');
+    });
 });
