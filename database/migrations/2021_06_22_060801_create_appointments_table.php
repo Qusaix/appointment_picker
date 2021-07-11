@@ -21,6 +21,7 @@ class CreateAppointmentsTable extends Migration
             $table->string('AM');
             $table->string('note');
             $table->string('ip');
+            $table->string('price')->nullable();
             $table->timestamps();
         });
     }

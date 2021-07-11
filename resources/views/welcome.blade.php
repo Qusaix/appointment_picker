@@ -160,7 +160,7 @@
     <nav class="nav-menu">
       <ul>
         <li class="active"><a href="#hero"><i class="bx bx-home"></i> <span>Home</span></a></li>
-        <li><a href="#about"><i class="bx bx-user"></i> <span>About</span></a></li>
+        {{-- <li><a href="#about"><i class="bx bx-user"></i> <span>About</span></a></li> --}}
         <li><a href="#appoinments"><i class="bx bx-book"></i> <span>Appoinments</span></a></li>
         <li><a href="#portfolio"><i class="bx bx-book-content"></i> <span>Portfolio</span></a></li>
         <li><a href="#services"><i class="bx bx-server"></i> <span>Services</span></a></li>
@@ -273,7 +273,7 @@
       </div>
       
     <!-- ======= About Section ======= -->
-    <section id="about" class="about">
+    {{-- <section id="about" class="about">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -298,11 +298,11 @@
                   <li><i class="icofont-rounded-right"></i> <strong>Freelance:</strong> Available</li>
                 </ul>
               </div>
-              {{-- <div class="col-lg-6">
+              <div class="col-lg-6">
                 <ul>
                   <li><i class="icofont-rounded-right"></i> <strong>Freelance:</strong> Available</li>
                 </ul>
-              </div> --}}
+              </div>
             </div>
             <p>
               Officiis eligendi itaque labore et dolorum mollitia officiis optio vero. Quisquam sunt adipisci omnis et ut. Nulla accusantium dolor incidunt officia tempore. Et eius omnis.
@@ -312,7 +312,8 @@
         </div>
 
       </div>
-    </section><!-- End About Section -->
+    </section> --}}
+    <!-- End About Section -->
 
     <!-- ======= Facts Section ======= -->
     <section id="appoinments" class="facts">
