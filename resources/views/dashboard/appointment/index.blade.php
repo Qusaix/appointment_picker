@@ -16,9 +16,12 @@
                     <tr>
                         <th>No</th>
                         <th>Name</th>
+                        <th>Date</th>
+                        <th>Phone</th>
                         <th>Ip</th>
                         <th>Note</th>
-                        <th>Phone</th>
+                        <th>Price</th>
+                        <th>status</th>
                         <th width="100px">Action</th>
                     </tr>
                 </thead>
@@ -39,9 +42,12 @@
               columns: [
                   {data: 'id', name: 'id'},
                   {data: 'name', name: 'name'},
+                  {data: 'time', name: 'time'},
+                  {data: 'phone', name: 'phone'},
                   {data: 'ip', name: 'ip'},
                   {data: 'note', name: 'note'},
                   {data: 'price', name: 'price'},
+                  {data: 'status', name: 'status'},
                   {data: 'action', name: 'action', orderable: false, searchable: false},
               ]
           });

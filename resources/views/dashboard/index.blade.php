@@ -348,7 +348,7 @@ return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
                                     <th>IP</th>
                                     <th>Start date</th>
                                     <th>Price</th>
-                                    <th>Action</th>
+                                    {{-- <th>Action</th> --}}
                                 </tr>
                             </thead>
                             {{-- <tfoot>
@@ -365,16 +365,16 @@ return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
                                 @foreach ($appointments as $ap)
                                 <tr>
                                     <td>{{$ap->name}}</td>
-                                    <td>{{$ap->instgrame}}</td>
+                                    <td>{{$ap->instagram}}</td>
                                     <td>{{$ap->note}}</td>
                                     <td>{{$ap->ip}}</td>
                                     <td>{{$ap->time}}</td>
-                                    <td>{{($ap->price)?$ap->price:"Price not avalible"}}</td>
-                                    <td>
+                                    <td>{{($ap->price)?'$'.$ap->price:"Price not avalible"}}</td>
+                                    {{-- <td>
                                         <a href="#" class="btn btn-info btn-circle btn-sm">
                                             <i class="fas fa-info-circle"></i>
                                         </a>                        
-                                    </td>
+                                    </td> --}}
                                 </tr>
                                 @endforeach                                                    
                             </tbody>
@@ -482,7 +482,7 @@ return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
                                 <th>IP</th>
                                 <th>Start date</th>
                                 <th>Price</th>
-                                <th>Action</th>
+                                {{-- <th>Action</th> --}}
                             </tr>
                         </thead>
                         {{-- <tfoot>
@@ -499,16 +499,16 @@ return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
                             @foreach ($today as $ap)
                             <tr>
                                 <td>{{$ap->name}}</td>
-                                <td>{{$ap->instgrame}}</td>
+                                <td>{{$ap->instagram}}</td>
                                 <td>{{$ap->note}}</td>
                                 <td>{{$ap->ip}}</td>
                                 <td>{{$ap->time}}</td>
-                                <td>{{ ($ap->price)?$ap->price:'Price not avalible' }}</td>
-                                <td>
+                                <td>{{($ap->price)?'$'.$ap->price:'Price not avalible' }}</td>
+                                {{-- <td>
                                     <a href="#" class="btn btn-info btn-circle btn-sm">
                                         <i class="fas fa-info-circle"></i>
                                     </a>                        
-                                </td>
+                                </td> --}}
 
                             </tr>
                             @endforeach                                                                                                    

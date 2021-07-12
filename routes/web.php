@@ -5,6 +5,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AppointmentsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\SettingController;
+
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::prefix('appointments')->group(function(){
     Route::post('store',[AppointmentsController::class,'store'])->name('appointment.store');
@@ -19,6 +21,13 @@ Route::prefix('dashboard')->middleware('auth')->group(function(){
     
     Route::prefix('appointment')->group(function(){
         Route::get('/',[AppointmentsController::class,'index'])->name('dashboard.appointment.index');
+        Route::get('edit/{id}',[AppointmentsController::class,'edit'])->name('dashboard.appointment.edit');
+        Route::post('update/{id}',[AppointmentsController::class,'update'])->name('dashboard.appointment.update');
         Route::get('datatable',[AppointmentsController::class,'datatable'])->name('dashboard.appointment.datatable');
+    });
+
+    Route::prefix('settings')->group(function(){
+        Route::get('/',[SettingController::class,'index'])->name('dashboard.settings.index');
+        Route::post('/update',[SettingController::class,'update'])->name('dashboard.settings.update');
     });
 });

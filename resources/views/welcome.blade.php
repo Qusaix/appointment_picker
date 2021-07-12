@@ -67,7 +67,7 @@
         initialDate: '2020-06-01',
         eventLimit: 1,
         isRTL: true, // for all non-TimeGrid views
-        hiddenDays: [ 2, 5 ],
+        hiddenDays: {!! json_encode($daysOff) !!},
         selectable:true,
         views: {
           timeGridMonth: {
@@ -105,8 +105,9 @@
             title:document.getElementById("name").value,
             start:startDate,
             name:document.getElementById("name").value,
-            instgrame:document.getElementById("Instagram_input").value,
+            instagram:document.getElementById("Instagram_input").value,
             time:startDate,
+            phone:document.getElementById('phone').value,
             AM:document.getElementById("dayNight").value,
             note:document.getElementById("Instagram_input").value,
             _token: "{{ csrf_token() }}",
@@ -125,15 +126,19 @@
                     }
                     if(res.status == 201)
                     {
-                        calendarModel.addEvent({
-                            title:document.getElementById("name").value,
-                            start:startDate
-                        })
+                        //adding to the calender
+                        // calendarModel.addEvent({
+                        //     title:document.getElementById("name").value,
+                        //     start:startDate
+                        // })
                         $('#exampleModal').modal('hide');
+                        $('#exampleModal3').modal('show');
                         document.getElementById("name").value = "";
                         document.getElementById("Instagram_input").value = "";
+                        document.getElementById('phone').value = "";
                         document.getElementById("dayNight").value = "";
                         document.getElementById("note").value = "";
+
                     }
             },
             error: function(err){
@@ -180,8 +185,8 @@
       </button>
       <div class="social-links">
         <!-- <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a> -->
-        <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-        <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+        <a href="{{$appInfo->facebook}}" target="_blank" class="facebook"><i class="bx bxl-facebook"></i></a>
+        <a href="{{$appInfo->instagram}}" class="instagram" target="_blank"><i class="bx bxl-instagram"></i></a>
       </div>
     </div>
   </section>
@@ -200,6 +205,27 @@
             <div class="modal-body">
               <p>
                   Please fill all the fields
+              </p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModal2Label" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModal2Label">Add Successfully</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>
+                  Appoinments was made i will contact you throw your phone number to conform the appointment
               </p>
             </div>
             <div class="modal-footer">
