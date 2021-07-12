@@ -168,8 +168,8 @@
         {{-- <li><a href="#about"><i class="bx bx-user"></i> <span>About</span></a></li> --}}
         <li><a href="#appoinments"><i class="bx bx-book"></i> <span>Appoinments</span></a></li>
         <li><a href="#portfolio"><i class="bx bx-book-content"></i> <span>Portfolio</span></a></li>
-        <li><a href="#services"><i class="bx bx-server"></i> <span>Services</span></a></li>
-        <li><a href="#contact"><i class="bx bx-envelope"></i> <span>Contact</span></a></li>
+        {{-- <li><a href="#services"><i class="bx bx-server"></i> <span>Services</span></a></li> --}}
+        {{-- <li><a href="#contact"><i class="bx bx-envelope"></i> <span>Contact</span></a></li> --}}
       </ul>
     </nav><!-- .nav-menu -->
 
@@ -427,10 +427,10 @@
 
         <div class="section-title">
           <h2>Portfolio</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          {{-- <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p> --}}
         </div>
 
-        <div class="row">
+        {{-- <div class="row">
           <div class="col-lg-12 d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
             <ul id="portfolio-flters">
               <li data-filter="*" class="filter-active">All</li>
@@ -439,25 +439,28 @@
               <li data-filter=".filter-web">Web</li>
             </ul>
           </div>
-        </div>
+        </div> --}}
 
         <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
 
+          @foreach ($images as $image)
           <div class="col-lg-4 col-md-6 portfolio-item filter-app">
             <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
+              <img src="{{$image->link}}" class="img-fluid" alt="">
               <div class="portfolio-info">
-                <h4>App 1</h4>
-                <p>App</p>
+                {{-- <h4>App 1</h4>
+                <p>App</p> --}}
                 <div class="portfolio-links">
-                  <a href="assets/img/portfolio/portfolio-1.jpg" data-gall="portfolioGallery" class="venobox" title="App 1"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details.html" data-gall="portfolioDetailsGallery" data-vbtype="iframe" class="venobox" title="Portfolio Details"><i class="bx bx-link"></i></a>
+                  <a href="{{$image->link}}" data-gall="portfolioGallery" class="venobox" title="App 1"><i class="bx bx-plus"></i></a>
+                  {{-- <a href="https://www.instagram.com/Qusaix1/" data-gall="portfolioDetailsGallery" data-vbtype="iframe" class="venobox" title="Portfolio Details"><i class="bx bx-link"></i></a> --}}
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+          @endforeach
+
+          {{-- <div class="col-lg-4 col-md-6 portfolio-item filter-web">
             <div class="portfolio-wrap">
               <img src="assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">
               <div class="portfolio-info">
@@ -567,7 +570,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> --}}
 
         </div>
 
@@ -575,7 +578,7 @@
     </section><!-- End Portfolio Section -->
 
     <!-- ======= Services Section ======= -->
-    <section id="services" class="services">
+    {{-- <section id="services" class="services">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -666,7 +669,7 @@
         </div>
 
       </div>
-    </section>
+    </section> --}}
     <!-- End Services Section -->
 
     <!-- ======= Testimonials Section ======= -->
@@ -741,7 +744,7 @@
     <!-- End Testimonials Section -->
 
     <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
+    {{-- <section id="contact" class="contact">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -803,7 +806,8 @@
         </div>
 
       </div>
-    </section><!-- End Contact Section -->
+    </section> --}}
+    <!-- End Contact Section -->
 
   </main><!-- End #main -->
 
@@ -813,7 +817,7 @@
       <h3>Salem sulibe</h3>
       <p>Et aut eum quis fuga eos sunt ipsa nihil. Labore corporis magni eligendi fuga maxime saepe commodi placeat.</p>
       <div class="social-links">
-        <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+        <a href="{{$appInfo->instagram}}" class="instagram"><i class="bx bxl-instagram"></i></a>
       </div>
       <div class="copyright">
         &copy; Copyright <strong><span>Salem sulibe</span></strong>. All Rights Reserved

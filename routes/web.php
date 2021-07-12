@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AppointmentsController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SettingController;
 
@@ -29,5 +30,10 @@ Route::prefix('dashboard')->middleware('auth')->group(function(){
     Route::prefix('settings')->group(function(){
         Route::get('/',[SettingController::class,'index'])->name('dashboard.settings.index');
         Route::post('/update',[SettingController::class,'update'])->name('dashboard.settings.update');
+    });
+
+    Route::prefix('images')->group(function(){
+        Route::get('/',[ImageController::class,'index'])->name('dashboard.images.index');
+        Route::get('/datatable',[ImageController::class,'datatable'])->name('dashboard.images.datatable');
     });
 });

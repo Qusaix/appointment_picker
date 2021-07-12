@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             AdminSeeder::class,
             SettingSeeder::class,
-            DaysSeeder::class
+            DaysSeeder::class,
+            ImageSeeder::class
         ]);
     
     }

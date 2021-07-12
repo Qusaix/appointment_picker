@@ -1,0 +1,1 @@
+<img style="width:50px;height:50px;" src="{{$image->link}}" alt="{{$image->link}}">
