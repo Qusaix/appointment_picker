@@ -11,6 +11,9 @@
             <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
         </div> --}}
         <div class="card-body">
+            <div class="text-right mb-5">
+                <button type="button" class="btn btn-primary"> <a href="{{route('dashboard.images.create')}}" style="color:#fff; text-decoration:none;">Add</a> </button>
+            </div>
             <table class="table table-bordered data-table">
                 <thead>
                     <tr>

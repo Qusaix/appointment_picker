@@ -14,6 +14,40 @@ class ImageController extends Controller
         return view('dashboard.images.index',compact('images'));
     }
 
+    public function create()
+    {
+        return view('dashboard.images.create');
+    }
+
+    public function store(Request $request)
+    {
+        Images::create($request->all());
+        
+        return \redirect()->route('dashboard.images.index');
+    }
+
+    public function edit($id)
+    {
+        $image = Images::findOrFail($id);
+        return view('dashboard.images.edit',compact('image'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $image = Images::findOrFail($id);
+        $image->link = $request->link;
+        $image->save();
+        return \redirect()->route('dashboard.images.index');
+    }
+
+    public function delete($id)
+    {
+        Images::find($id)->delete();
+        return \redirect()->route('dashboard.images.index');
+
+    }
+
+
     public function datatable()
     {
         $images = Images::orderBy('created_at','desc')->get();
@@ -21,7 +55,7 @@ class ImageController extends Controller
         return DataTables::of($images)
         ->addIndexColumn()
         ->addColumn('action',function(Images $data){
-            return view('dashboard.actions.edit',compact('data'));
+            return view('dashboard.actions.editImage',compact('data'));
         })
         ->editColumn('link',function(Images $image){
             return view('dashboard.actions.image',compact('image'));

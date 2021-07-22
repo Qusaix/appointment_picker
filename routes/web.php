@@ -34,6 +34,11 @@ Route::prefix('dashboard')->middleware('auth')->group(function(){
 
     Route::prefix('images')->group(function(){
         Route::get('/',[ImageController::class,'index'])->name('dashboard.images.index');
+        Route::get('/create',[ImageController::class,'create'])->name('dashboard.images.create');
+        Route::post('/store',[ImageController::class,'store'])->name('dashboard.images.store');
+        Route::get('/edit/{id}',[ImageController::class,'edit'])->name('dashboard.images.edit');
+        Route::get('/delete/{id}',[ImageController::class,'delete'])->name('dashboard.images.delete');
+        Route::post('/update/{id}',[ImageController::class,'update'])->name('dashboard.images.update');
         Route::get('/datatable',[ImageController::class,'datatable'])->name('dashboard.images.datatable');
     });
 });
