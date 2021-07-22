@@ -76,6 +76,7 @@
         },
         events: {!! json_encode($formatedAppointments) !!},
         select:function(start,end,allDays){
+          alert('Here!')
             $('#exampleModal').modal('show');
             eventData = {
                         title:'title',
