@@ -29,14 +29,13 @@
 
   <link href='{{asset('fullcalendar/main.css')}}' rel='stylesheet' />
 <script src='{{asset('fullcalendar/main.js')}}'></script>
-<script type="text/javascript" src="https://unpkg.com/default-passive-events"></script>
 
   
 <script>
 
     (() => {
         'use strict';
-      
+        document.addEventListener('touchstart', handler, {passive: true});.
         // Fetch all the forms we want to apply custom Bootstrap validation styles to
         const forms = document.querySelectorAll('.needs-validation');
       
