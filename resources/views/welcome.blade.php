@@ -35,7 +35,7 @@
 
     (() => {
         'use strict';
-        document.addEventListener('touchstart', handler, {passive: true});.
+        document.addEventListener('touchstart', handler, {passive: true});
         // Fetch all the forms we want to apply custom Bootstrap validation styles to
         const forms = document.querySelectorAll('.needs-validation');
       
