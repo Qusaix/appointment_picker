@@ -29,9 +29,25 @@
 
   <link href='{{asset('fullcalendar/main.css')}}' rel='stylesheet' />
 <script src='{{asset('fullcalendar/main.js')}}'></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
   
+
+<style>
+  .sortable-handler {
+  touch-action: none;
+}
+
+</style>
+
 <script>
+
+
+// addEventListener("touchstart", function(e) {
+//     console.log(e.defaultPrevented);  // will be false
+//     e.preventDefault();   // does nothing since the listener is passive
+//     console.log(e.defaultPrevented);  // still false
+//   }, Modernizr.passiveeventlisteners ? {passive: false} : false);
+  document.addEventListener("mousewheel", { passive: false });
 
     (() => {
         'use strict';
@@ -65,6 +81,9 @@
         initialView: 'dayGridMonth',
         initialDate: '2020-06-01',
         eventLimit: 1,
+        dayRender: function(event, element) {
+            $(element).addTouch();
+        },
         isRTL: true, // for all non-TimeGrid views
         hiddenDays: {!! json_encode($daysOff) !!},
         selectable:true,
@@ -75,7 +94,6 @@
         },
         events: {!! json_encode($formatedAppointments) !!},
         select:function(start,end,allDays){
-          alert('Here!')
             $('#exampleModal').modal('show');
             eventData = {
                         title:'title',
