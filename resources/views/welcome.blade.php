@@ -115,6 +115,8 @@
 
     function addNewEvent(start)
     {
+      $('#exampleModal').modal('hide');
+      $('#loadingModal').modal('show');
         let newEvent = {
             title:document.getElementById("name").value,
             start:startDate,
@@ -138,7 +140,8 @@
             success: function (res) { 
                     if(res.status == 202)
                     {
-                      alert(res.err);
+                      // alert(res.err);
+                      $('#loadingModal').modal('hide');
                       $('#exampleModal').modal('hide');
                       return;
                     }
@@ -149,7 +152,8 @@
                         //     title:document.getElementById("name").value,
                         //     start:startDate
                         // })
-                        $('#exampleModal').modal('hide');
+                        // $('#exampleModal').modal('hide');
+                        $('#loadingModal').modal('hide');
                         $('#exampleModal3').modal('show');
                         document.getElementById("name").value = "";
                         document.getElementById("Instagram_input").value = "";
@@ -160,7 +164,8 @@
                     }
             },
             error: function(err){
-              $('#exampleModal').modal('hide')
+              // $('#exampleModal').modal('hide')
+              $('#loadingModal').modal('hide');
               $('#exampleModal2').modal('show')
             }
         });
@@ -315,7 +320,47 @@
           </div>
         </div>
       </div>
+      <div data-backdrop="static" data-keyboard="false" class="modal" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Saveing the Appointment</h5>
+              {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button> --}}
+            </div>
+            <div class="modal-body text-center">
+              <div class="spinner-grow text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+              <div class="spinner-grow text-secondary" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+              <div class="spinner-grow text-success" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+              <div class="spinner-grow text-danger" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+              <div class="spinner-grow text-warning" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+              <div class="spinner-grow text-info" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+              <div class="spinner-grow text-light" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+              <div class="spinner-grow text-dark" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
       
+            
     <!-- ======= About Section ======= -->
     {{-- <section id="about" class="about">
       <div class="container" data-aos="fade-up">
@@ -363,7 +408,8 @@
     <section id="appoinments" class="facts">
       <div class="container" data-aos="fade-up">
         <h3>
-          Make an Appoinments
+          Make an Appoinments <b/>
+          <span> <p style="color:gray; font-size:12px;">if your entering the website from mobile please click the date for 1 second to open it.</p></span>
         </h3>
         <div id='calendar'></div>
         </div>
@@ -833,7 +879,7 @@
   <footer id="footer">
     <div class="container">
       <h3>Salem sulibe</h3>
-      <p>Et aut eum quis fuga eos sunt ipsa nihil. Labore corporis magni eligendi fuga maxime saepe commodi placeat.</p>
+      <p>This is just a test version of the website, any problem with the speed or anything else will resolved in the full release.</p>
       <div class="social-links">
         <a href="{{$appInfo->instagram}}" class="instagram"><i class="bx bxl-instagram"></i></a>
       </div>
