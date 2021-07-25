@@ -26,7 +26,8 @@ class SettingRequest extends FormRequest
         return [
             'instagram' => 'required',
             'facebook' => 'required',
-            'daysOff' => 'required'
+            'daysOff' => 'required',
+            'appointmentsRange' => 'required|integer|min:2'
         ];
     }
 }

@@ -49,6 +49,7 @@
 //   }, Modernizr.passiveeventlisteners ? {passive: false} : false);
   document.addEventListener("mousewheel", { passive: false });
 
+
     (() => {
         'use strict';
         // Fetch all the forms we want to apply custom Bootstrap validation styles to
@@ -66,25 +67,37 @@
         });
     })();
 
+
     let events = [ {
       id: 'a',
       title: 'my event',
       start: '2021-06-21'
     }
 ]
+      var today = new Date();
+      var dd = String(today.getDate()).padStart(2, '0');
+      var mm = String(today.getMonth() + 1).padStart(2, '0'); 
+      var mm2 = String(today.getMonth() + parseInt({!! json_encode($appInfo->appointmentsRange) !!})).padStart(2, '0'); // chose how many months in the futuer you want the users can make an appointment's
+      var yyyy = today.getFullYear();
+    
+      today = yyyy + '-' + mm + '-' + dd;
+      toDate = yyyy + '-' + mm2 + '-' + dd;
+
+      // console.log('today date: ',today)
+      // console.log('next month: ',toDate)
     let startDate;
     let calendarModel;
     document.addEventListener('DOMContentLoaded', function() {
+      $('#MobileMessage').hide();
+  if (typeof window.orientation !== 'undefined') {
+  $('#MobileMessage').show();
+  }
+
       var calendarEl = document.getElementById('calendar');
       var calendar = new FullCalendar.Calendar(calendarEl, {
         editable: false,
         initialView: 'dayGridMonth',
-        initialDate: '2020-06-01',
-        eventLimit: 1,
-        dayRender: function(event, element) {
-            $(element).addTouch();
-        },
-        isRTL: true, // for all non-TimeGrid views
+        initialDate: today,
         hiddenDays: {!! json_encode($daysOff) !!},
         selectable:true,
         views: {
@@ -104,9 +117,11 @@
 
             calendarModel = calendar;
         },
-        validRange: {
-          start: '2020-06-01',
-          end: '2020-07-31'
+        validRange: function(nowDate) {
+        return {
+          start: today,
+          end: toDate
+          };
        }
       });
       // calendar.setOption('locale', 'ar');
@@ -409,7 +424,7 @@
       <div class="container" data-aos="fade-up">
         <h3>
           Make an Appoinments <b/>
-          <span> <p style="color:gray; font-size:12px;">if your entering the website from mobile please click the date for 1 second to open it.</p></span>
+          <span id='MobileMessage'> <p style="color:gray; font-size:12px;">please click the date for 1 second to open it.</p></span>
         </h3>
         <div id='calendar'></div>
         </div>

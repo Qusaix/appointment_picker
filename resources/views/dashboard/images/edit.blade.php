@@ -20,11 +20,9 @@
                   <small id="instagramHelp" class="form-text text-muted">upload images from www.imgbb.com and add the link above</small>
                 </div>
                 <div class="col-md-12 text-right">
-                    <button type='button' class="btn btn-danger">
-                        <a style="color: #ffff" href="{{route('dashboard.images.index')}}">
+                    <a href="{{route('dashboard.images.index')}}" type='button' class="btn btn-danger">
                             Cancel
-                        </a>
-                    </button>
+                    </a>
                     <button type="submit" class="btn btn-info">Save</button>
                 </div>             
               </form>

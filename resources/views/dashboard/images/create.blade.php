@@ -17,7 +17,7 @@
                 <div class="form-group">
                   <label for="exampleInputEmail1">Image Link</label>
                   <input name="link" value="{{(old('image')?old('image'):'')}}" type="text" class="form-control" id="image" aria-describedby="image" placeholder="https://www.imgbb.com/YourImageLink.png">
-                  <small id="instagramHelp" class="form-text text-muted">upload images from www.imgbb.com and add the link above</small>
+                  <small id="instagramHelp" class="form-text text-muted">upload images from <a target="_blank" href="https://imgbb.com/">www.imgbb.com</a> and add the link above</small>
                 </div>
                 <div class="col-md-12 text-right">
                     <button type='button' class="btn btn-danger">

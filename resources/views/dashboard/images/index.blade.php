@@ -12,7 +12,7 @@
         </div> --}}
         <div class="card-body">
             <div class="text-right mb-5">
-                <button type="button" class="btn btn-primary"> <a href="{{route('dashboard.images.create')}}" style="color:#fff; text-decoration:none;">Add</a> </button>
+                <a href="{{route('dashboard.images.create')}}" type="button" class="btn btn-primary"> Add</a>
             </div>
             <table class="table table-bordered data-table">
                 <thead>

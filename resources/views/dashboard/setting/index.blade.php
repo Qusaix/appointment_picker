@@ -25,6 +25,11 @@
                     <small id="facebookHelp" class="form-text text-muted">add the full link</small>
                 </div>
                 <div class="form-group">
+                    <label for="exampleInputEmail1">Range</label>
+                    <input type="number" value="{{(old('appointmentsRange'))?old('appointmentsRange'):$setting->appointmentsRange}}" name="appointmentsRange" class="form-control" id="facebookInput" aria-describedby="emailHelp" placeholder="ex.3">
+                    <small id="appointmentsRangeHelp" class="form-text text-muted">Range of months in the future that the user can make an appointment in</small>
+                </div>
+                <div class="form-group">
                     <label for="exampleFormControlSelect2">Chose your day's off</label>
                     <select name='daysOff[]' multiple class="form-control" id="exampleFormControlSelect2">
                       @foreach ($days as $day)

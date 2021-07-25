@@ -17,6 +17,7 @@ class CreateSettingsTable extends Migration
             $table->id();
             $table->string('instagram');
             $table->string('facebook');
+            $table->string('appointmentsRange');
             $table->timestamps();
         });
     }

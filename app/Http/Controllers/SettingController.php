@@ -21,6 +21,7 @@ class SettingController extends Controller
         $setting = Settings::find(1);
         $setting->instagram = $request->instagram;
         $setting->facebook = $request->facebook;
+        $setting->appointmentsRange = $request->appointmentsRange;
         $setting->save();
         $allDays = Day::get();
         // remove all the days off

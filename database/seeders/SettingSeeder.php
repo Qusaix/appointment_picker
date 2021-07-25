@@ -15,8 +15,9 @@ class SettingSeeder extends Seeder
     public function run()
     {
         $data = [
-            'instagram'=>'link',
-            'facebook'=>'link'
+            'instagram'=>'',
+            'facebook'=>'',
+            'appointmentsRange'=>'3'
         ];
         Settings::create($data);
     }
