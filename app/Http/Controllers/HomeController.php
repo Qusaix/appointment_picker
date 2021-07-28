@@ -22,7 +22,7 @@ class HomeController extends Controller
         foreach($appointments as $key => $ap)
         {
             $newFormate = (object)array(
-                'title' => $ap->name,
+                'title' => 'Appointment',
                 'start' => $ap->time
             );
             array_push($formatedAppointments,$newFormate);
