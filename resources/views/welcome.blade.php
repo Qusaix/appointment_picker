@@ -144,7 +144,7 @@
             time:startDate,
             phone:document.getElementById('phone').value,
             AM:document.getElementById("dayNight").value,
-            note:document.getElementById("Instagram_input").value,
+            note:document.getElementById("note").value,
             _token: "{{ csrf_token() }}",
         }
         $.ajax({
@@ -424,7 +424,7 @@
       <div class="container" data-aos="fade-up">
         <h3>
           Make an Appoinments <b/>
-          <span id='MobileMessage'> <p style="color:gray; font-size:12px;">please click the date for 1 second to open it.</p></span>
+          <span id='MobileMessage'> <p style="color:gray; font-size:12px;">please click the date for 1 second to make an appoinment.</p></span>
         </h3>
         <div id='calendar'></div>
         </div>
@@ -894,7 +894,7 @@
   <footer id="footer">
     <div class="container">
       <h3>Salem sulibe</h3>
-      <p>This is just a test version of the website, any problem with the speed or anything else will resolved in the full release.</p>
+      <p>This is just a test version of the website, any problem with the speed or anything else will be resolved in the full release.</p>
       <div class="social-links">
         <a href="{{$appInfo->instagram}}" class="instagram"><i class="bx bxl-instagram"></i></a>
       </div>

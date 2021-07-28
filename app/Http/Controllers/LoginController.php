@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,7 +12,7 @@ class LoginController extends Controller
     {
         return view('login');
     }
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
         
         $credentials = $request->only('email', 'password');
@@ -21,7 +22,7 @@ class LoginController extends Controller
         }
         else
         {
-            return 'please enter the right cred';
+            return back()->withErrors('please add the correct cred');
         }
     }
 

@@ -41,15 +41,22 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
+                                    @if($errors->any())
+                                    <div class="alert alert-danger" role="alert"> There is something wrong
+                                        @foreach ($errors->all() as $error )
+                                            <li>{{$error}}</li>
+                                        @endforeach
+                                    </div>
+                                    @endif                        
                                     <form method="POST" action="{{route('loginButton')}}" class="user">
                                         @csrf
                                         <div class="form-group">
-                                            <input name="email" type="email" class="form-control form-control-user"
+                                            <input value="{{old('email')}}" name="email" type="email" class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
                                                 placeholder="Enter Email Address...">
                                         </div>
                                         <div class="form-group">
-                                            <input name="password" type="password" class="form-control form-control-user"
+                                            <input value="{{old('password')}}" name="password" type="password" class="form-control form-control-user"
                                                 id="exampleInputPassword" placeholder="Password" autocomplete="on">
                                         </div>
                                         {{-- <div class="form-group">

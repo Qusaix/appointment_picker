@@ -18,7 +18,8 @@ class HomeController extends Controller
         $daysOff = Day::where('isOff',1)->pluck('number')->all();
         $appInfo = Settings::find(1);
         $formatedAppointments = [];
-        foreach($appointments as $ap)
+        $makeCounterArray = [];
+        foreach($appointments as $key => $ap)
         {
             $newFormate = (object)array(
                 'title' => $ap->name,

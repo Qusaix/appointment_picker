@@ -13,7 +13,7 @@ Route::prefix('appointments')->group(function(){
     Route::post('store',[AppointmentsController::class,'store'])->name('appointment.store');
 });
 
-Route::get('login',[LoginController::class,'index'])->name('login');
+Route::get('login',[LoginController::class,'index'])->name('login')->middleware('loginMiddleware');
 Route::post('loginButton',[LoginController::class,'login'])->name('loginButton');
 
 Route::prefix('dashboard')->middleware('auth')->group(function(){
