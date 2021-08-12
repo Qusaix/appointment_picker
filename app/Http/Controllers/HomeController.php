@@ -23,9 +23,9 @@ class HomeController extends Controller
             'facebook'=>'',
             'appointmentsRange'=>'3'
         ];
-        Settings::create($data);
+       $newData =  Settings::create($data);
         $appInfo = Settings::find(1);
-        dd($appInfo);
+        dd($newData);
         foreach($appointments as $key => $ap)
         {
             $newFormate = (object)array(
