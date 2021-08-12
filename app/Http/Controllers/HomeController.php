@@ -17,6 +17,7 @@ class HomeController extends Controller
         $images = Images::get();
         $daysOff = Day::where('isOff',1)->pluck('number')->all();
         $appInfo = Settings::find(1);
+        return $appInfo;
         $formatedAppointments = [];
         $makeCounterArray = [];
         foreach($appointments as $key => $ap)
