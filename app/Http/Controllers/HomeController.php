@@ -24,8 +24,8 @@ class HomeController extends Controller
             'appointmentsRange'=>'3'
         ];
        $newData =  Settings::create($data);
-        $appInfo = Settings::find(1);
-        dd($newData);
+        $appInfo = Settings::get()[0];
+        dd($appInfo);
         foreach($appointments as $key => $ap)
         {
             $newFormate = (object)array(
