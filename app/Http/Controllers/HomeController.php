@@ -25,7 +25,6 @@ class HomeController extends Controller
         ];
        $newData =  Settings::create($data);
         $appInfo = Settings::get()[0];
-        dd($appInfo);
         foreach($appointments as $key => $ap)
         {
             $newFormate = (object)array(
