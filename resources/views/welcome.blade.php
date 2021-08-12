@@ -891,7 +891,7 @@
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
-  <footer id="footer">
+  {{-- <footer id="footer">
     <div class="container">
       <h3>Salem sulibe</h3>
       <p>This is just a test version of the website, any problem with the speed or anything else will be resolved in the full release.</p>
@@ -909,7 +909,7 @@
         <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
       </div>
     </div>
-  </footer><!-- End Footer -->
+  </footer><!-- End Footer --> --}}
 
   <a href="#" class="back-to-top"><i class="bx bx-up-arrow-alt"></i></a>
   <div id="preloader"></div>
