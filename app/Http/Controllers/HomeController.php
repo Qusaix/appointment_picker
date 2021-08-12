@@ -16,9 +16,16 @@ class HomeController extends Controller
         $appointments = Appointment::where('status',1)->get();
         $images = Images::get();
         $daysOff = Day::where('isOff',1)->pluck('number')->all();
-        $appInfo = Settings::find(1);
         $formatedAppointments = [];
         $makeCounterArray = [];
+        $data = [
+            'instagram'=>'',
+            'facebook'=>'',
+            'appointmentsRange'=>'3'
+        ];
+        Settings::create($data);
+        $appInfo = Settings::find(1);
+        dd($appInfo);
         foreach($appointments as $key => $ap)
         {
             $newFormate = (object)array(
