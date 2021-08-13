@@ -11,14 +11,14 @@ class SettingController extends Controller
 {
     public function index()
     {
-        $setting = Settings::find(1);
+        $setting = Settings::get()[0];
         $days = Day::get();
         return view('dashboard.setting.index',compact('setting','days'));
     }
 
     public function update(SettingRequest $request)
     {
-        $setting = Settings::find(1);
+        $setting = Settings::get()[0];
         $setting->instagram = $request->instagram;
         $setting->facebook = $request->facebook;
         $setting->appointmentsRange = $request->appointmentsRange;
