@@ -21,6 +21,7 @@
                         <th>Ip</th>
                         <th>Note</th>
                         <th>Price</th>
+                        <th>Was Made </th>
                         <th>status</th>
                         <th width="100px">Action</th>
                     </tr>
@@ -40,13 +41,14 @@
               serverSide: true,
               ajax: "{{ route('dashboard.appointment.datatable') }}",
               columns: [
-                  {data: 'id', name: 'id'},
+                  {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                   {data: 'name', name: 'name'},
                   {data: 'time', name: 'time'},
                   {data: 'phone', name: 'phone'},
                   {data: 'ip', name: 'ip'},
                   {data: 'note', name: 'note'},
                   {data: 'price', name: 'price'},
+                  {data: 'created_at', name: 'created_at'},
                   {data: 'status', name: 'status'},
                   {data: 'action', name: 'action', orderable: false, searchable: false},
               ]

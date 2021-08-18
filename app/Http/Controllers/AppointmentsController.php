@@ -56,7 +56,7 @@ class AppointmentsController extends Controller
     public function datatable()
     {
         $data = Appointment::orderBy('created_at','desc')->get();
-
+        $numberOfAppointment = 0;
         return DataTables::of($data)
         ->addIndexColumn()
         ->editColumn('price',function(Appointment $appointment){
@@ -82,6 +82,9 @@ class AppointmentsController extends Controller
             {
                 return 'Conform';
             }
+        })
+        ->editColumn('created_at',function(Appointment $image){
+            return $image->created_at->diffForHumans();
         })
         ->addColumn('action',function(Appointment $data){
             return view('dashboard.actions.edit',compact('data'));
