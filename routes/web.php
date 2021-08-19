@@ -21,10 +21,11 @@ Route::prefix('dashboard')->middleware('auth')->group(function(){
     Route::post('logout',[LoginController::class,'logout'])->name('dashboad.logout');
     
     Route::prefix('appointment')->group(function(){
-        Route::get('/',[AppointmentsController::class,'index'])->name('dashboard.appointment.index');
+        Route::get('index/{id?}',[AppointmentsController::class,'index'])->name('dashboard.appointment.index');
         Route::get('edit/{id}',[AppointmentsController::class,'edit'])->name('dashboard.appointment.edit');
+        Route::get('delete/{id}',[AppointmentsController::class,'delete'])->name('dashboard.appointment.delete');
         Route::post('update/{id}',[AppointmentsController::class,'update'])->name('dashboard.appointment.update');
-        Route::get('datatable',[AppointmentsController::class,'datatable'])->name('dashboard.appointment.datatable');
+        Route::get('datatable/{id?}',[AppointmentsController::class,'datatable'])->name('dashboard.appointment.datatable');
     });
 
     Route::prefix('settings')->group(function(){

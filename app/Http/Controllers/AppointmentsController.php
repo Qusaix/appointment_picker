@@ -7,13 +7,13 @@ use App\Models\Appointment;
 use App\Http\Requests\AppointmentsRequest;
 use App\Http\Requests\EditAppointmentsRequest;
 use Yajra\DataTables\Facades\DataTables;
+use Carbon\Carbon;
 
 class AppointmentsController extends Controller
 {
-    public function index()
+    public function index($filter = null)
     {
-        $appointments = Appointment::paginate(50);
-        return view('dashboard.appointment.index',compact('appointments'));
+        return view('dashboard.appointment.index',compact('filter'));
     }
     public function store(AppointmentsRequest $request)
     {   
@@ -53,10 +53,33 @@ class AppointmentsController extends Controller
         return redirect()->route('dashboard.appointment.index');
     }
 
-    public function datatable()
+    public function delete($id)
     {
-        $data = Appointment::orderBy('created_at','desc')->get();
-        $numberOfAppointment = 0;
+        Appointment::findOrFail($id)->delete();
+        return back();
+    }
+
+    public function datatable($filter = null)
+    {
+        $data = [];
+        if($filter  == 1)
+        {
+            $data = Appointment::orderBy('created_at','desc')->whereDate('time', Carbon::today())->get();
+        }
+        elseif($filter == 2)
+        {
+            $data = Appointment::orderBy('created_at','desc')->whereBetween('time', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get();
+            
+        }
+        elseif($filter == 3)
+        {
+            $data = Appointment::orderBy('created_at','desc')->whereMonth('time', Carbon::now()->month)->get();
+        }
+        else
+        {
+            $data = Appointment::orderBy('created_at','desc')->get();
+        }
+
         return DataTables::of($data)
         ->addIndexColumn()
         ->editColumn('price',function(Appointment $appointment){

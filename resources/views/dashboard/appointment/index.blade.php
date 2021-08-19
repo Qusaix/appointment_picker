@@ -7,9 +7,17 @@
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
-        {{-- <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
-        </div> --}}
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Filter</h6>
+            <div class="form-group">
+                <label for="filterData">Select the range of days you want to see the appoinments from</label>
+                <select onChange="filterData()" class="form-control" id="filterData">
+                    <option>All</option>
+                  <option {{ ($filter == 1)?'selected':'' }} value='1'>Today</option>
+                  <option {{ ($filter == 2)?'selected':'' }} value='2'>This Week</option>
+                  <option {{ ($filter == 3)?'selected':'' }} value ='3' >This Month</option>
+                </select>
+              </div>
         <div class="card-body">
             <table class="table table-bordered data-table">
                 <thead>
@@ -39,7 +47,7 @@
           var table = $('.table').DataTable({
               processing: true,
               serverSide: true,
-              ajax: "{{ route('dashboard.appointment.datatable') }}",
+              ajax: "{{ route('dashboard.appointment.datatable',$filter) }}",
               columns: [
                   {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                   {data: 'name', name: 'name'},
@@ -54,7 +62,18 @@
               ]
           });
           
+          
         });
+
+        function filterData(value)
+        {
+            var select = document.getElementById('filterData');
+			var option = select.options[select.selectedIndex];
+            var url = '{{ route("dashboard.appointment.index", ":id") }}';
+                url = url.replace(':id', option.value);
+
+            window.location.href = url;
+        }
       </script>
       
 

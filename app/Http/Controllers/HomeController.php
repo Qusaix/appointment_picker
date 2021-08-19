@@ -18,12 +18,6 @@ class HomeController extends Controller
         $daysOff = Day::where('isOff',1)->pluck('number')->all();
         $formatedAppointments = [];
         $makeCounterArray = [];
-        $data = [
-            'instagram'=>'',
-            'facebook'=>'',
-            'appointmentsRange'=>'3'
-        ];
-       $newData =  Settings::create($data);
         $appInfo = Settings::get()[0];
         foreach($appointments as $key => $ap)
         {

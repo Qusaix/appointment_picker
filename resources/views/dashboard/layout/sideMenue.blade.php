@@ -48,7 +48,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Salem Dashboard <sup>version 0.5</sup></div>
+                <div class="sidebar-brand-text mx-3">Salem Dashboard <sup>version 0.8</sup></div>
             </a>
 
             <!-- Divider -->
@@ -452,8 +452,8 @@
     <script src="{{asset('dashboard/vendor/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('dashboard/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
-    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script defer src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="{{asset('dashboard/vendor/datatables/jquery.dataTables.min.js')}}"></script>
+    <script defer src="{{asset('dashboard/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
 
     <!-- Core plugin JavaScript-->
     <script src="{{asset('dashboard/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
