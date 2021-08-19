@@ -323,7 +323,7 @@
                       </select>
                   </div>
                 <div class="form-group">
-                  <label for="message-text" class="col-form-label">Note:</label>
+                  <label for="message-text" class="col-form-label">Details:  <small class="form-text text-muted">(Add the appointment details like where the pictures will be taken)</small></label>
                   <textarea class="form-control" id="note"></textarea>
                 </div>
               </form>
