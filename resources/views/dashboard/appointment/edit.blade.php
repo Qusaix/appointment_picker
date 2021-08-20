@@ -20,7 +20,7 @@
             <li class="list-group-item">Name: {{$appointment->name}}</li>
             <li class="list-group-item">Phone: {{$appointment->phone}}</li>
             <li class="list-group-item">Instagram: <a href="https://www.instagram.com/{{$appointment->instagram}}" target="_blank">{{$appointment->instagram}}</a></li>
-            <li class="list-group-item">Date: {{$appointment->time}}</li>
+            <li class="list-group-item">Date: {{date('D', strtotime($appointment->time)).' '.date("d/m/Y", strtotime(str_replace('-"', '/', $appointment->time)))}}</li>
             <li class="list-group-item">Note: {{$appointment->note}}</li>
           </ul>
       </div>

@@ -433,19 +433,27 @@
     </section><!-- End Facts Section -->
 
     <!-- ======= Skills Section ======= -->
-    <!-- <section id="skills" class="skills section-bg">
+    <section id="skills" class="skills section-bg">
       <div class="container" data-aos="fade-up">
-
+        <script 
+        src="https://cdn2.woxo.tech/a.js#611fca8acd880a00161b3c2f" 
+        async data-usrc>
+      </script>
         <div class="section-title">
-          <h2>Skills</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <h2>Instagram Feed</h2>
+          <p>You Can Follow me There</p>
         </div>
 
         <div class="row skills-content">
 
-          <div class="col-lg-6">
-
-            <div class="progress">
+          {{-- <div class="col-lg-6"> --}}
+            <div 
+            loading="lazy"
+            data-mc-src="4ec42c25-660f-4318-9b37-42e73523ff59#instagram"
+            class="col-lg-12"
+            >
+          </div>          
+            {{-- <div class="progress">
               <span class="skill">HTML <i class="val">100%</i></span>
               <div class="progress-bar-wrap">
                 <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
@@ -491,12 +499,12 @@
               </div>
             </div>
 
-          </div>
+          </div> --}}
 
-        </div>
+        {{-- </div> --}}
 
       </div>
-    </section> -->
+    </section> 
     <!-- End Skills Section -->
 
 

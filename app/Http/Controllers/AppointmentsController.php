@@ -106,8 +106,13 @@ class AppointmentsController extends Controller
                 return 'Conform';
             }
         })
-        ->editColumn('created_at',function(Appointment $image){
-            return $image->created_at->diffForHumans();
+        ->editColumn('time',function(Appointment $appointment){
+            $data = str_replace('-"', '/', $appointment->time);
+            $newDate = date("d/m/Y", strtotime($data));  
+            return date('D', strtotime($appointment->time)).' '.$newDate;
+        })
+        ->editColumn('created_at',function(Appointment $appointment){
+            return $appointment->created_at->diffForHumans();
         })
         ->addColumn('action',function(Appointment $data){
             return view('dashboard.actions.edit',compact('data'));

@@ -83,7 +83,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                            Pending Requests</div>
+                            Pending Appointment's</div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">{{$pendingRequest}}</div>
                     </div>
                     <div class="col-auto">
@@ -346,7 +346,7 @@ return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
                                     <th>Instagram</th>
                                     <th>Note</th>
                                     <th>IP</th>
-                                    <th>Start date</th>
+                                    <th>Date</th>
                                     <th>Price</th>
                                     {{-- <th>Action</th> --}}
                                 </tr>
@@ -368,7 +368,7 @@ return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
                                     <td>{{$ap->instagram}}</td>
                                     <td>{{$ap->note}}</td>
                                     <td>{{$ap->ip}}</td>
-                                    <td>{{$ap->time}}</td>
+                                    <td>{{date('D', strtotime($ap->time)).' '.date("d/m/Y", strtotime(str_replace('-"', '/', $ap->time)))}}</td>
                                     <td>{{($ap->price)?'$'.$ap->price:"Price not avalible"}}</td>
                                     {{-- <td>
                                         <a href="#" class="btn btn-info btn-circle btn-sm">
@@ -480,7 +480,7 @@ return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
                                 <th>Instagram</th>
                                 <th>Note</th>
                                 <th>IP</th>
-                                <th>Start date</th>
+                                <th>Date</th>
                                 <th>Price</th>
                                 {{-- <th>Action</th> --}}
                             </tr>
@@ -502,7 +502,7 @@ return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
                                 <td>{{$ap->instagram}}</td>
                                 <td>{{$ap->note}}</td>
                                 <td>{{$ap->ip}}</td>
-                                <td>{{$ap->time}}</td>
+                                <td>{{date('D', strtotime($ap->time)).' '.date("d/m/Y", strtotime(str_replace('-"', '/', $ap->time)))}}</td>
                                 <td>{{($ap->price)?'$'.$ap->price:'Price not avalible' }}</td>
                                 {{-- <td>
                                     <a href="#" class="btn btn-info btn-circle btn-sm">

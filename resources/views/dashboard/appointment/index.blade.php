@@ -18,6 +18,7 @@
                   <option {{ ($filter == 3)?'selected':'' }} value ='3' >This Month</option>
                 </select>
               </div>
+        </div>      
         <div class="card-body">
             <table class="table table-bordered data-table">
                 <thead>
