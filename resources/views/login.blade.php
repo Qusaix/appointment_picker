@@ -57,15 +57,15 @@
                                         </div>
                                         <div class="form-group">
                                             <input value="{{old('password')}}" name="password" type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Password" autocomplete="on">
+                                                id="exampleInputPassword" placeholder="Password" >
                                         </div>
-                                        {{-- <div class="form-group">
+                                        <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">Remember
+                                                <input name='remember_me' type="checkbox" class="custom-control-input" id="customCheck">
+                                                <label  class="custom-control-label" for="customCheck">Remember
                                                     Me</label>
                                             </div>
-                                        </div> --}}
+                                        </div>
                                         <button type="submit" class="btn btn-primary btn-user btn-block">
                                             Login
                                         </button>
