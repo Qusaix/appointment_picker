@@ -293,7 +293,7 @@
                   <input type="number" class="form-control" id="phone">
                 </div>
                 <div class="form-group">
-                    <label for="recipient-name" class="col-form-label">Instagram:</label>
+                    <label for="recipient-name" class="col-form-label">Instagram: <small class="form-text text-muted">(Add the instagram tag ex:salemsulibe)</small></label>
                     <input type="text" class="form-control" id="Instagram_input">
                 </div>
                 <div class="form-group">
