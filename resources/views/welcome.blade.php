@@ -40,8 +40,6 @@
 
 <script>
   document.addEventListener("mousewheel", { passive: false });
-
-
     (() => {
         'use strict';
         // Fetch all the forms we want to apply custom Bootstrap validation styles to
@@ -60,12 +58,12 @@
     })();
 
 
-    let events = [ {
+    let events = [{
       id: 'a',
       title: 'my event',
       start: '2021-06-21'
-    }
-]
+    }]
+
       var today = new Date();
       var dd = String(today.getDate()).padStart(2, '0');
       var mm = String(today.getMonth() + 1).padStart(2, '0'); 
@@ -78,10 +76,11 @@
     let startDate;
     let calendarModel;
     document.addEventListener('DOMContentLoaded', function() {
-      $('#MobileMessage').hide();
-  if (typeof window.orientation !== 'undefined') {
-  $('#MobileMessage').show();
-  }
+    $('#MobileMessage').hide();
+    if (typeof window.orientation !== 'undefined') 
+    {
+      $('#MobileMessage').show();
+    }
 
       var calendarEl = document.getElementById('calendar');
       var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -96,15 +95,15 @@
           }
         },
         events: {!! json_encode($formatedAppointments) !!},
-        select:function(start,end,allDays){
+        select:function(start,end,allDays)
+        {
             $('#exampleModal').modal('show');
-            eventData = {
-                        title:'title',
-                        start: start.startStr,
-                 };
-
-                 startDate = start.startStr;
-
+            eventData = 
+            {
+              title:'title',
+              start: start.startStr,
+            };
+            startDate = start.startStr;
             calendarModel = calendar;
         },
         validRange: function(nowDate) {
@@ -133,7 +132,7 @@
             instagram:document.getElementById("Instagram_input").value,
             time:startDate,
             phone:document.getElementById('phone').value,
-            AM:document.getElementById("dayNight").value,
+            AM:0,
             note:document.getElementById("note").value,
             _token: "{{ csrf_token() }}",
         }
@@ -145,7 +144,6 @@
             success: function (res) { 
                     if(res.status == 202)
                     {
-                      // alert(res.err);
                       $('#loadingModal').modal('hide');
                       $('#exampleModal').modal('hide');
                       return;
@@ -157,21 +155,16 @@
                         document.getElementById("name").value = "";
                         document.getElementById("Instagram_input").value = "";
                         document.getElementById('phone').value = "";
-                        document.getElementById("dayNight").value = "";
                         document.getElementById("note").value = "";
-
+                        $("textarea#note").val("");
                     }
             },
             error: function(err){
               $('#loadingModal').modal('hide');
               $('#exampleModal2').modal('show')
             }
-        });
-        
-        
+        });   
     }
-    
-
   </script>
 </head>
 
@@ -274,32 +267,6 @@
                     <input type="text" class="form-control" id="Instagram_input">
                 </div>
                 <div class="form-group">
-                    <label for="recipient-name" class="col-form-label">Time:</label>
-                    <select class="form-control" id="time">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                      </select>
-                  
-                </div>
-                <div class="form-group">
-                    <label for="message-text" class="col-form-label">AM/PM:</label>
-                    <select class="form-control" id="dayNight">
-                        <option value="0">AM</option>
-                        <option value="1">PM</option>
-                        
-                      </select>
-                  </div>
-                <div class="form-group">
                   <label for="message-text" class="col-form-label">Details:  <small class="form-text text-muted">(Add the appointment details like where the pictures will be taken)</small></label>
                   <textarea class="form-control" id="note"></textarea>
                 </div>
@@ -379,7 +346,7 @@
           @foreach ($images as $image)
           <div class="col-lg-4 col-md-6 portfolio-item filter-app">
             <div class="portfolio-wrap">
-              <img src="{{$image->link}}" class="img-fluid" alt="">
+              <img loading="lazy" alt="{{$image->link}}" src="{{$image->link}}" class="img-fluid">
               <div class="portfolio-info">
                 <div class="portfolio-links">
                   <a href="{{$image->link}}" data-gall="portfolioGallery" class="venobox" title="App 1"><i class="bx bx-plus"></i></a>
@@ -407,11 +374,6 @@
   <script src="{{asset('assets/vendor/owl.carousel/owl.carousel.min.js')}}"></script>
   <script src="{{asset('assets/vendor/typed.js/typed.min.js')}}"></script>
   <script src="{{asset('assets/vendor/aos/aos.js')}}"></script>
-  <script 
-  src="https://cdn2.woxo.tech/a.js#611fca8acd880a00161b3c2f" 
-  async data-usrc>
-</script>
-
   <!-- Template Main JS File -->
   <script src="{{asset('assets/js/main.js')}}"></script>
 

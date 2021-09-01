@@ -20,7 +20,7 @@
               </div>
         </div>      
         <div class="card-body">
-            <table class="table table-bordered data-table">
+            <table class="table table-bordered data-table col">
                 <thead>
                     <tr>
                         <th>No</th>

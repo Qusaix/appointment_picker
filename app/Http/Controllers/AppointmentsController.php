@@ -18,7 +18,6 @@ class AppointmentsController extends Controller
     public function store(AppointmentsRequest $request)
     {   
         $request->merge(['ip' => $request->getClientIp()]);
-        // return $request;
         $dayCheck = Appointment::where('time',$request->time)
         ->where('status',0)
         ->get()

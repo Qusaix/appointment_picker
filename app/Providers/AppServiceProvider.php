@@ -25,8 +25,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Builder::defaultStringLength(191);
-        if($this->app->environment('local')) {
+        if($this->app->environment('local')) 
+        {
             \URL::forceScheme('https');
-                    }
+        }
     }
 }
