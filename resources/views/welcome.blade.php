@@ -143,7 +143,7 @@
                     if(res.status == 202)
                     {
                       $('#loadingModal').modal('hide');
-                      $('#exampleModal').modal('hide');
+                      $('#FullDayModal').modal('show');
                       return;
                     }
                     if(res.status == 201)
@@ -213,6 +213,26 @@
             <div class="modal-body">
               <p>
                   Please fill all the fields
+              </p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="FullDayModal" tabindex="-1" role="dialog" aria-labelledby="FullDayModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="FullDayModal">Error</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>
+                  The day is full try please try another one 
               </p>
             </div>
             <div class="modal-footer">

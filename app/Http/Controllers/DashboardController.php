@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Appointment;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\AppointmentImport;
+use App\Exports\AppointmentExport;
+
+
 
 class DashboardController extends Controller
 {
@@ -99,4 +104,17 @@ class DashboardController extends Controller
 
         return view('dashboard.index',compact('appointments','today','monthlySales','currentMonthEarnings','annualEarnings','pendingRequest'));
     }
+
+    public function export() 
+    {
+        return Excel::download(new AppointmentExport, 'report.xlsx');
+    }
+
+    public function import() 
+    {
+        Excel::import(new AppointmentImport,request()->file('file'));
+           
+        return redirect()->back();
+    }
+
 }

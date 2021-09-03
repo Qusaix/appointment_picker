@@ -48,7 +48,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Salem Dashboard <sup>version 0.8</sup></div>
+                <div class="sidebar-brand-text mx-3">Salem Dashboard <sup>version 1.0</sup></div>
             </a>
 
             <!-- Divider -->

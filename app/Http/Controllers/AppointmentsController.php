@@ -19,7 +19,7 @@ class AppointmentsController extends Controller
     {   
         $request->merge(['ip' => $request->getClientIp()]);
         $dayCheck = Appointment::where('time',$request->time)
-        ->where('status',0)
+        ->where('status',1)
         ->get()
         ->count();
         if($dayCheck >= 4)
@@ -81,6 +81,9 @@ class AppointmentsController extends Controller
 
         return DataTables::of($data)
         ->addIndexColumn()
+        ->editColumn('name',function(Appointment $appointment){
+            return view('dashboard.actions.userName',compact('appointment'));
+        })
         ->editColumn('price',function(Appointment $appointment){
             if($appointment->price == null)
             {

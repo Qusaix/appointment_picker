@@ -18,6 +18,8 @@ Route::post('loginButton',[LoginController::class,'login'])->name('loginButton')
 
 Route::prefix('dashboard')->middleware('auth')->group(function(){
     Route::get('home',[DashboardController::class,'index'])->name('dashboard');
+    Route::post('download_report',[DashboardController::class,'export'])->name('dashboard.report');
+    Route::post('download_report2',[DashboardController::class,'import'])->name('dashboard.report2');
     Route::post('logout',[LoginController::class,'logout'])->name('dashboad.logout');
     
     Route::prefix('appointment')->group(function(){
