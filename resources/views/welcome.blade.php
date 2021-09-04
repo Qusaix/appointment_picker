@@ -95,14 +95,52 @@
         events: {!! json_encode($formatedAppointments) !!},
         select:function(start,end,allDays)
         {
-            $('#exampleModal').modal('show');
-            eventData = 
-            {
-              title:'title',
-              start: start.startStr,
-            };
-            startDate = start.startStr;
-            calendarModel = calendar;
+        //  let check =  checkDay(start.startStr)
+        //  console.log(check)
+
+
+         $.ajax({
+            url: "{{route('dashboard.appointment.checkDay')}}",
+            type: 'POST',
+            data: {
+              time:start.startStr,
+              _token: "{{ csrf_token() }}",
+            },
+            dataType: 'JSON',
+            success:function(res){
+              if(res.status == 200)
+              {
+                $('#exampleModal').modal('show');
+                eventData = 
+                {
+                  title:'title',
+                  start: start.startStr,
+                };
+                startDate = start.startStr;
+                calendarModel = calendar;
+              }
+              else
+              {
+                $('#FullDayModal').modal('show');
+              }
+            },
+            error:function(err){
+              console.log('check day error: ',err)
+            }
+      })
+
+          // if(check)
+          // {
+          //   $('#exampleModal').modal('show');
+          //   eventData = 
+          //   {
+          //     title:'title',
+          //     start: start.startStr,
+          //   };
+          //   startDate = start.startStr;
+          //   calendarModel = calendar;
+
+          // }
         },
         validRange: function(nowDate) {
         return {
@@ -163,6 +201,40 @@
             }
         });   
     }
+    function checkDay(date)
+    {
+      let avalible;
+      $.ajax({
+            url: "{{route('dashboard.appointment.checkDay')}}",
+            type: 'POST',
+            data: {
+              time:date,
+              // _token: "{{ csrf_token() }}",
+            },
+            dataType: 'JSON',
+            success:function(res){
+              if(res.status == 200)
+              {
+
+              }
+              else
+              {
+                $('#FullDayModal').modal('show');
+              }
+            },
+            error:function(err){
+              console.log('check day error: ',err)
+            }
+      })
+      console.log('avalible: ',avalible)
+      return avalible;
+
+    }
+
+    function openAfterValdation()
+    {
+      $('#exampleModal').modal('show');
+    }
   </script>
 </head>
 
@@ -216,7 +288,7 @@
               </p>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" onclick="openAfterValdation()" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
           </div>
         </div>
@@ -232,7 +304,7 @@
             </div>
             <div class="modal-body">
               <p>
-                  The day is full try please try another one 
+                  The day is full please try another one 
               </p>
             </div>
             <div class="modal-footer">

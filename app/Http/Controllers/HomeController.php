@@ -21,10 +21,23 @@ class HomeController extends Controller
         $appInfo = Settings::get()[0];
         foreach($appointments as $key => $ap)
         {
-            $newFormate = (object)array(
-                'title' => 'Appointment',
-                'start' => $ap->time
-            );
+            $dayCheck = Appointment::where('time',$ap->time)->get()->count();
+            if($dayCheck >= 4)
+            {
+                $newFormate = (object)array(
+                    'title' => 'Full',
+                    'start' => $ap->time,
+                    'display'=>'background',
+                );    
+            }
+            else
+            {
+                $newFormate = (object)array(
+                    'title' => 'Appointment',
+                    'start' => $ap->time
+                );    
+            }
+
             array_push($formatedAppointments,$newFormate);
         }
         return view('welcome',compact('name','formatedAppointments','daysOff','appInfo','images'));

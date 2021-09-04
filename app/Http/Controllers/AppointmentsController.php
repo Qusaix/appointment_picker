@@ -122,4 +122,30 @@ class AppointmentsController extends Controller
         ->rawColumns(['action'])
         ->make(true);
     }
+    
+    public function checkDay(Request $request)
+    {
+        $dayCheck = Appointment::where('time',$request->time)
+        ->where('status',1)
+        ->get()
+        ->count();
+
+        if($dayCheck >= 4)
+        {
+            return response()->json([
+                'err'=>'the day is full',
+                'status'=>202
+            ],202);
+        }
+        else
+        {
+            return response()->json([
+                'msg'=>'day is avalible',
+                'status'=>200
+            ],200);
+
+        }
+
+
+    }
 }

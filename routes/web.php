@@ -27,6 +27,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function(){
         Route::get('edit/{id}',[AppointmentsController::class,'edit'])->name('dashboard.appointment.edit');
         Route::get('delete/{id}',[AppointmentsController::class,'delete'])->name('dashboard.appointment.delete');
         Route::post('update/{id}',[AppointmentsController::class,'update'])->name('dashboard.appointment.update');
+        Route::post('checkDay',[AppointmentsController::class,'checkDay'])->name('dashboard.appointment.checkDay');
         Route::get('datatable/{id?}',[AppointmentsController::class,'datatable'])->name('dashboard.appointment.datatable');
     });
 
