@@ -37,6 +37,7 @@
 </style>
 
 <script>
+  let token = "{{ csrf_token() }}";
   document.addEventListener("mousewheel", { passive: false });
     (() => {
         'use strict';
@@ -79,7 +80,6 @@
     {
       $('#MobileMessage').show();
     }
-
       var calendarEl = document.getElementById('calendar');
       var calendar = new FullCalendar.Calendar(calendarEl, {
         editable: false,
@@ -100,7 +100,7 @@
             type: 'POST',
             data: {
               time:start.startStr,
-              _token: "{{ csrf_token() }}",
+              _token: token,
             },
             dataType: 'JSON',
             success:function(res){
@@ -166,7 +166,7 @@
             phone:document.getElementById('phone').value,
             AM:0,
             note:document.getElementById("note").value,
-            _token: "{{ csrf_token() }}",
+            _token: token,
         }
         $.ajax({
             url: "{{route('appointment.store')}}",
