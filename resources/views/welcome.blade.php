@@ -95,10 +95,6 @@
         events: {!! json_encode($formatedAppointments) !!},
         select:function(start,end,allDays)
         {
-        //  let check =  checkDay(start.startStr)
-        //  console.log(check)
-
-
          $.ajax({
             url: "{{route('dashboard.appointment.checkDay')}}",
             type: 'POST',
@@ -200,35 +196,6 @@
               $('#exampleModal2').modal('show')
             }
         });   
-    }
-    function checkDay(date)
-    {
-      let avalible;
-      $.ajax({
-            url: "{{route('dashboard.appointment.checkDay')}}",
-            type: 'POST',
-            data: {
-              time:date,
-              // _token: "{{ csrf_token() }}",
-            },
-            dataType: 'JSON',
-            success:function(res){
-              if(res.status == 200)
-              {
-
-              }
-              else
-              {
-                $('#FullDayModal').modal('show');
-              }
-            },
-            error:function(err){
-              console.log('check day error: ',err)
-            }
-      })
-      console.log('avalible: ',avalible)
-      return avalible;
-
     }
 
     function openAfterValdation()
