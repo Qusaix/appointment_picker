@@ -8,6 +8,7 @@
   <title>Salem sulibe</title>
   <meta content="website for making an appointments" name="description">
   <meta content="photographer,instgrame,Salem,salem,salemsulibe" name="keywords">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <!-- Favicons -->
   <link href="{{asset('assets/img/favicon.png')}}" rel="icon">
@@ -75,6 +76,12 @@
     let startDate;
     let calendarModel;
     document.addEventListener('DOMContentLoaded', function() {
+      $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
     $('#MobileMessage').hide();
     if (typeof window.orientation !== 'undefined') 
     {
@@ -100,7 +107,6 @@
             type: 'POST',
             data: {
               time:start.startStr,
-              _token: token,
             },
             dataType: 'JSON',
             success:function(res){
@@ -166,7 +172,7 @@
             phone:document.getElementById('phone').value,
             AM:0,
             note:document.getElementById("note").value,
-            _token: token,
+            // _token: token,
         }
         $.ajax({
             url: "{{route('appointment.store')}}",
