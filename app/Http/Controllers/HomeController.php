@@ -21,7 +21,10 @@ class HomeController extends Controller
         $appInfo = Settings::get()[0];
         foreach($appointments as $key => $ap)
         {
-            $dayCheck = Appointment::where('time',$ap->time)->get()->count();
+            $dayCheck = Appointment::where('time',$ap->time)
+            ->where('status',1)
+            ->get()
+            ->count();
             if($dayCheck >= 4)
             {
                 $newFormate = (object)array(
