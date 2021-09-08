@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Images;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ImageController extends Controller
 {
@@ -23,7 +24,12 @@ class ImageController extends Controller
     {
         Images::create($request->all());
         
-        return \redirect()->route('dashboard.images.index');
+        //return \redirect()->route('dashboard.images.index');
+        Alert::toast('Image was added', 'success');
+        return response()->json([
+            'msg'=>'image was added',
+            'status'=>201
+        ],201);
     }
 
     public function edit($id)

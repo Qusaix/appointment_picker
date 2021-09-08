@@ -8,12 +8,41 @@ use App\Http\Requests\AppointmentsRequest;
 use App\Http\Requests\EditAppointmentsRequest;
 use Yajra\DataTables\Facades\DataTables;
 use Carbon\Carbon;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class AppointmentsController extends Controller
 {
+
     public function index($filter = null)
     {
-        return view('dashboard.appointment.index',compact('filter'));
+        $appointments = [];
+        if($filter  == 1)
+        {
+            $appointments = Appointment::orderBy('created_at','desc')->whereDate('time', Carbon::today())->paginate(10);
+        }
+        elseif($filter == 2)
+        {
+            $appointments = Appointment::orderBy('created_at','desc')->whereBetween('time', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->paginate(10);
+            
+        }
+        elseif($filter == 3)
+        {
+            $appointments = Appointment::orderBy('created_at','desc')->whereMonth('time', Carbon::now()->month)->paginate(10);
+        }
+        elseif($filter != null&&$filter != 'null')
+        {
+            $appointments = Appointment::orderBy('created_at','desc')->where('name', 'LIKE', "%{$filter}%")
+            ->orWhere('phone', 'LIKE', "%{$filter}%")
+            ->paginate(10);
+        }
+        else
+        {
+            $appointments = Appointment::orderBy('created_at','desc')->paginate(10);
+        }
+
+        // $appointments = Appointment::orderBy('created_at','desc')->paginate(10);
+        return view('dashboard.appointment.index',compact('filter','appointments'));
     }
     public function store(AppointmentsRequest $request)
     {   
@@ -48,7 +77,7 @@ class AppointmentsController extends Controller
         $appointment->price = $request->price;
         $appointment->status = $request->status;
         $appointment->save();
-
+        Alert::toast('Appointment was updated', 'success');
         return redirect()->route('dashboard.appointment.index');
     }
 

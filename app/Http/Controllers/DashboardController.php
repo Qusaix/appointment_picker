@@ -15,16 +15,16 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $appointments = Appointment::orderBy('created_at', 'desc')->get()->take(10);
+        $appointments = Appointment::orderBy('created_at', 'desc')->get()->take(5);
         $today = Appointment::whereDate('created_at',Carbon::today())->orderBy('created_at','desc')->get();
-        $currentMonthEarnings = Appointment::whereYear('created_at', Carbon::now()->year)
-        ->whereMonth('created_at', Carbon::now()->month)
-        ->sum('price');
-        $annualEarnings = Appointment::whereYear('created_at', Carbon::now()->year)
-        ->sum('price');
+        $currentMonthEarnings = number_format(Appointment::where('status',1)->whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->month)->sum('price'),2);
+        $annualEarnings = number_format(Appointment::where('status',1)->whereYear('created_at', Carbon::now()->year)->sum('price'),2);
         $pendingRequest = Appointment::where('price','=',null)->get()->count();
         // $monthlySales = [0, 10000, 5000, 15000, 10000, 20000, 15000, 25000, 20000, 30000, 25000, 1000];
         $monthlySales = [];
+        $todaAppointments = Appointment::orderBy('created_at','desc')->where('status',1)->whereDate('time', Carbon::today())->get();
+        $todaAppointmentsEaring = number_format(Appointment::orderBy('created_at','desc')->where('status',1)->whereDate('time', Carbon::today())->sum('price'),2);
+
         //monthlySales logic
         $year = Carbon::now()->year;
         $month = 1;
@@ -102,7 +102,7 @@ class DashboardController extends Controller
 
         
 
-        return view('dashboard.index',compact('appointments','today','monthlySales','currentMonthEarnings','annualEarnings','pendingRequest'));
+        return view('dashboard.index',compact('appointments','today','monthlySales','currentMonthEarnings','annualEarnings','pendingRequest','todaAppointments','todaAppointmentsEaring'));
     }
 
     public function export() 

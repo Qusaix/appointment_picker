@@ -1,539 +1,326 @@
-
-@extends('dashboard.layout.sideMenue')
-
-@section('section')
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-    <form action="{{route('dashboard.report')}}" method="post">
-        @csrf
-        <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-            class="fas fa-download fa-sm text-white-50"></i> Generate Report</button>
-    </form>
-</div>
-
-<!-- Content Row -->
-<div class="row">
-
-    <!-- Earnings (Monthly) Card Example -->
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-primary shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            Earnings (Monthly)</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">${{$currentMonthEarnings}}</div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Earnings (Monthly) Card Example -->
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-success shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                            Earnings (Annual)</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">${{$annualEarnings}}</div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Earnings (Monthly) Card Example -->
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-info shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Today's Appointments
-                        </div>
-                        <div class="row no-gutters align-items-center">
-                            <div class="col-auto">
-                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{$today->count()}}</div>
-                            </div>
-                            {{-- <div class="col">
-                                <div class="progress progress-sm mr-2">
-                                    <div class="progress-bar bg-info" role="progressbar"
-                                        style="width: 50%" aria-valuenow="50" aria-valuemin="0"
-                                        aria-valuemax="100"></div>
+@extends('dashboard.layout.nav2')
+@section('content')
+<div class="page-content">
+    <section class="row">
+        <div class="col-12 col-lg-9">
+            <div class="row">
+                <div class="col-6 col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="card-body px-3 py-4-5">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="stats-icon purple">
+                                        <i class="iconly-boldProfile"></i>
+                                    </div>
                                 </div>
-                            </div> --}}
+                                <div class="col-md-8">
+                                    <h6 class="text-muted font-semibold">This Month</h6>
+                                    <h6 class="font-extrabold mb-0">${{$currentMonthEarnings}}</h6>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-auto">
-                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                </div>
+                <div class="col-6 col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="card-body px-3 py-4-5">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="stats-icon blue">
+                                        <i class="iconly-boldProfile"></i>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <h6 class="text-muted font-semibold">This year</h6>
+                                    <h6 class="font-extrabold mb-0">${{$annualEarnings}}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="card-body px-3 py-4-5">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="stats-icon green">
+                                        <i class="iconly-boldAdd-User"></i>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <h6 class="text-muted font-semibold">New Ap</h6>
+                                    <h6 class="font-extrabold mb-0">{{$today->count()}}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="card-body px-3 py-4-5">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="stats-icon red">
+                                        <i class="iconly-boldBookmark"></i>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <h6 class="text-muted font-semibold">Pending Ap</h6>
+                                    <h6 class="font-extrabold mb-0">{{$pendingRequest}}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          
+            <div class="row">
+                <div class="col-12 col-xl-6">
+                    {{-- <div class="card">
+                        <div class="card-header">
+                            <h4>Profile Visit</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="d-flex align-items-center">
+                                        <svg class="bi text-primary" width="32" height="32" fill="blue"
+                                            style="width:10px">
+                                            <use
+                                                xlink:href="{{asset('assets1/vendors/bootstrap-icons/bootstrap-icons.svg#circle-fill')}}" />
+                                        </svg>
+                                        <h5 class="mb-0 ms-3">Europe</h5>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <h5 class="mb-0">862</h5>
+                                </div>
+                                <div class="col-12">
+                                    <div id="chart-europe"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="d-flex align-items-center">
+                                        <svg class="bi text-success" width="32" height="32" fill="blue"
+                                            style="width:10px">
+                                            <use
+                                                xlink:href="{{asset('assets1/vendors/bootstrap-icons/bootstrap-icons.svg#circle-fill')}}" />
+                                        </svg>
+                                        <h5 class="mb-0 ms-3">America</h5>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <h5 class="mb-0">375</h5>
+                                </div>
+                                <div class="col-12">
+                                    <div id="chart-america"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="d-flex align-items-center">
+                                        <svg class="bi text-danger" width="32" height="32" fill="blue"
+                                            style="width:10px">
+                                            <use
+                                                xlink:href="{{asset('assets1/vendors/bootstrap-icons/bootstrap-icons.svg#circle-fill')}}" />
+                                        </svg>
+                                        <h5 class="mb-0 ms-3">Indonesia</h5>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <h5 class="mb-0">1025</h5>
+                                </div>
+                                <div class="col-12">
+                                    <div id="chart-indonesia"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> --}}
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Today's Appoinments</h4>
+                            <h6 class="text-muted mb-0">Revenue: ${{$todaAppointmentsEaring}}</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-lg">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Phone</th>
+                                            <th>Note</th>
+                                            <th>Price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            @foreach ($todaAppointments as $ap)
+                                                <td class="col-3">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="avatar avatar-md">
+                                                                {{-- <img src="{{asset('assets1/images/faces/5.jpg')}}"> --}}
+                                                                <p>
+                                                                    {{$ap->name}}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="col-auto">
+                                                        <p class=" mb-0">{{$ap->phone}}</p>
+                                                    </td>
+                                                    <td class="col-auto">
+                                                        <p class=" mb-0">{{$ap->note}}</p>
+                                                    </td>
+                                                    <td>
+                                                        <p>
+                                                            ${{$ap->price}}
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        {{-- <tr>
+                                            <td class="col-3">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="avatar avatar-md">
+                                                        <img src="{{asset('assets1/images/faces/2.jpg')}}">
+                                                    </div>
+                                                    <p class="font-bold ms-3 mb-0">Si Ganteng</p>
+                                                </div>
+                                            </td>
+                                            <td class="col-auto">
+                                                <p class=" mb-0">Wow amazing design! Can you make another
+                                                    tutorial for
+                                                    this design?</p>
+                                            </td>
+                                        </tr> --}}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-xl-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Latest Appoinments</h4>
+                        </div>
+                        <div class="card-content pb-4">
+                            @foreach ($appointments as $ap)
+                            <div class="recent-message d-flex px-4 py-3">
+                                <div class="avatar avatar-lg">
+                                    <img src="{{asset('assets1/images/faces/5.jpg')}}">
+                                </div>
+                                <div class="name ms-4">
+                                    <h5 class="mb-1"><a href="https://www.instagram.com/{{$ap->instagram}}">{{$ap->name}}</a></h5>
+                                    <h6 class="text-muted mb-0"><a href="{{route('dashboard.appointment.edit',$ap->id)}}">Show</a></h6>
+                                </div>
+                                
+                            </div>
+                            @endforeach
+                            <div class="px-4">
+                                <button class='btn btn-block btn-xl btn-light-primary font-bold mt-3'>See All</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Pending Requests Card Example -->
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-warning shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                            Pending Appointment's</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{$pendingRequest}}</div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-comments fa-2x text-gray-300"></i>
+        <div class="col-12 col-lg-3">
+            <div class="card">
+                <div class="card-body py-4 px-5">
+                    <div class="d-flex align-items-center">
+                        <div class="avatar avatar-xl">
+                            <img src="{{asset('assets1/images/faces/2.jpg')}}" alt="Face 1">
+                        </div>
+                        <div class="ms-3 name">
+                            <h5 class="font-bold">Salem sulibe</h5>
+                            <h6 class="text-muted mb-0">@salemsulibe</h6>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-
-<!-- Content Row -->
-
-<div class="row">
-
-    
-    <!-- Area Chart -->
-    <div class="col-xl-12 col-lg-12">
-        <div class="card shadow mb-4">
-            <!-- Card Header - Dropdown -->
-            <div
-                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
-                <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                        aria-labelledby="dropdownMenuLink">
-                        <div class="dropdown-header">Dropdown Header:</div>
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
+            <div class="card">
+                <div class="card-header">
+                    <h4>Was added today</h4>
+                    <h6 class="text-muted mb-0">You have {{$today->count()}} new appoinments</h6>
+                </div>
+                <div class="card-content pb-4">
+                    @foreach ($today as $ap)
+                        <div class="recent-message d-flex px-4 py-3">
+                            <div class="avatar avatar-lg">
+                                <img src="{{asset('assets1/images/faces/5.jpg')}}">
+                            </div>
+                            <div class="name ms-4">
+                                <h5 class="mb-1"> <a href="">{{$ap->name}}</a></h5>
+                                <h6 class="text-muted mb-0"><a href="{{route('dashboard.appointment.edit',$ap->id)}}">Show</a></h6>
+                            </div>
+                        </div>
+                    @endforeach
+                    {{-- <div class="px-4">
+                        <button class='btn btn-block btn-xl btn-light-primary font-bold mt-3'>Go to appoinments</button>
+                    </div> --}}
                 </div>
             </div>
-            <!-- Card Body -->
-            <div class="card-body">
-                <div class="chart-area">
-                    <canvas id="myAreaChart"></canvas>
+            
+            {{-- <div class="card">
+                <div class="card-header">
+                    <h4>Visitors Profile</h4>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Pie Chart -->
-    {{-- <div class="col-xl-4 col-lg-5">
-        <div class="card shadow mb-4">
-            <!-- Card Header - Dropdown -->
-            <div
-                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-                <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                        aria-labelledby="dropdownMenuLink">
-                        <div class="dropdown-header">Dropdown Header:</div>
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Card Body -->
-            <div class="card-body">
-                <div class="chart-pie pt-4 pb-2">
-                    <canvas id="myPieChart"></canvas>
-                </div>
-                <div class="mt-4 text-center small">
-                    <span class="mr-2">
-                        <i class="fas fa-circle text-primary"></i> Direct
-                    </span>
-                    <span class="mr-2">
-                        <i class="fas fa-circle text-success"></i> Social
-                    </span>
-                    <span class="mr-2">
-                        <i class="fas fa-circle text-info"></i> Referral
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-</div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-
-
-<script>
-    function number_format(number, decimals, dec_point, thousands_sep) {
-// *     example: number_format(1234.56, 2, ',', ' ');
-// *     return: '1 234,56'
-number = (number + '').replace(',', '').replace(' ', '');
-var n = !isFinite(+number) ? 0 : +number,
-prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
-sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
-dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
-s = '',
-toFixedFix = function(n, prec) {
-var k = Math.pow(10, prec);
-return '' + Math.round(n * k) / k;
-};
-// Fix for IE parseFloat(0.55).toFixed(0) = 0;
-s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
-if (s[0].length > 3) {
-s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
-}
-if ((s[1] || '').length < prec) {
-s[1] = s[1] || '';
-s[1] += new Array(prec - s[1].length + 1).join('0');
-}
-return s.join(dec);
-}
-
-    var ctx = document.getElementById("myAreaChart");
-var myLineChart = new Chart(ctx, {
-type: 'line',
-data: {
-labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-datasets: [{
-label: "Earnings",
-lineTension: 0.3,
-backgroundColor: "rgba(78, 115, 223, 0.05)",
-borderColor: "rgba(78, 115, 223, 1)",
-pointRadius: 3,
-pointBackgroundColor: "rgba(78, 115, 223, 1)",
-pointBorderColor: "rgba(78, 115, 223, 1)",
-pointHoverRadius: 3,
-pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-pointHoverBorderColor: "rgba(78, 115, 223, 1)",
-pointHitRadius: 10,
-pointBorderWidth: 2,
-data: {!! json_encode($monthlySales) !!},
-}],
-},
-options: {
-maintainAspectRatio: false,
-layout: {
-padding: {
-left: 10,
-right: 25,
-top: 25,
-bottom: 0
-}
-},
-scales: {
-xAxes: [{
-time: {
-unit: 'date'
-},
-gridLines: {
-display: false,
-drawBorder: false
-},
-ticks: {
-maxTicksLimit: 7
-}
-}],
-yAxes: [{
-ticks: {
-maxTicksLimit: 5,
-padding: 10,
-// Include a dollar sign in the ticks
-callback: function(value, index, values) {
-return '$' + number_format(value);
-}
-},
-gridLines: {
-color: "rgb(234, 236, 244)",
-zeroLineColor: "rgb(234, 236, 244)",
-drawBorder: false,
-borderDash: [2],
-zeroLineBorderDash: [2]
-}
-}],
-},
-legend: {
-display: false
-},
-tooltips: {
-backgroundColor: "rgb(255,255,255)",
-bodyFontColor: "#858796",
-titleMarginBottom: 10,
-titleFontColor: '#6e707e',
-titleFontSize: 14,
-borderColor: '#dddfeb',
-borderWidth: 1,
-xPadding: 15,
-yPadding: 15,
-displayColors: false,
-intersect: false,
-mode: 'index',
-caretPadding: 10,
-callbacks: {
-label: function(tooltipItem, chart) {
-var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
-}
-}
-}
-}
-});
-
-</script>
-
-
-<!-- Content Row -->
-<div class="row">
-
-    <!-- Content Column -->
-    <div class="col-lg-6 mb-4">
-
-        <!-- Project Card Example -->
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Latest Appointments</h6>
-            </div>
-            {{-- <div class="card-body">
-                <h4 class="small font-weight-bold">Server Migration <span
-                        class="float-right">20%</span></h4>
-                <div class="progress mb-4">
-                    <div class="progress-bar bg-danger" role="progressbar" style="width: 20%"
-                        aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <h4 class="small font-weight-bold">Sales Tracking <span
-                        class="float-right">40%</span></h4>
-                <div class="progress mb-4">
-                    <div class="progress-bar bg-warning" role="progressbar" style="width: 40%"
-                        aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <h4 class="small font-weight-bold">Customer Database <span
-                        class="float-right">60%</span></h4>
-                <div class="progress mb-4">
-                    <div class="progress-bar" role="progressbar" style="width: 60%"
-                        aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <h4 class="small font-weight-bold">Payout Details <span
-                        class="float-right">80%</span></h4>
-                <div class="progress mb-4">
-                    <div class="progress-bar bg-info" role="progressbar" style="width: 80%"
-                        aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <h4 class="small font-weight-bold">Account Setup <span
-                        class="float-right">Complete!</span></h4>
-                <div class="progress">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%"
-                        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="card-body">
+                    <div id="chart-visitors-profile"></div>
                 </div>
             </div> --}}
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Instagram</th>
-                                    <th>Note</th>
-                                    <th>IP</th>
-                                    <th>Date</th>
-                                    <th>Price</th>
-                                    {{-- <th>Action</th> --}}
-                                </tr>
-                            </thead>
-                            {{-- <tfoot>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
-                                    <th>Age</th>
-                                    <th>Start date</th>
-                                    <th>Salary</th>
-                                </tr>
-                            </tfoot> --}}
-                            <tbody>
-                                @foreach ($appointments as $ap)
-                                <tr>
-                                    <td>{{$ap->name}}</td>
-                                    <td>{{$ap->instagram}}</td>
-                                    <td>{{$ap->note}}</td>
-                                    <td>{{$ap->ip}}</td>
-                                    <td>{{date('D', strtotime($ap->time)).' '.date("d/m/Y", strtotime(str_replace('-"', '/', $ap->time)))}}</td>
-                                    <td>{{($ap->price)?'$'.$ap->price:"Price not avalible"}}</td>
-                                    {{-- <td>
-                                        <a href="#" class="btn btn-info btn-circle btn-sm">
-                                            <i class="fas fa-info-circle"></i>
-                                        </a>                        
-                                    </td> --}}
-                                </tr>
-                                @endforeach                                                    
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
         </div>
+        
+        <script src="{{asset('assets1/vendors/apexcharts/apexcharts.js')}}"></script>
+        {{-- <script src="{{asset('assets1/js/pages/dashboard.js')}}"></script> --}}
+        <script src="{{asset('assets1/js/main.js')}}"></script>
 
-        <!-- Color System -->
-        {{-- <div class="row">
-            <div class="col-lg-6 mb-4">
-                <div class="card bg-primary text-white shadow">
+        <script>
+            var optionsProfileVisit = {
+                annotations: {
+                    position: 'back'
+                },
+                dataLabels: {
+                    enabled:true
+                },
+                chart: {
+                    type: 'bar',
+                    height: 300
+                },
+                fill: {
+                    opacity:1
+                },
+                plotOptions: {
+                },
+                series: [{
+                    name: 'Earrings',
+                    data: {!! json_encode($monthlySales) !!}
+                }],
+                colors: '#435ebe',
+                xaxis: {
+                    categories: ["Jan","Feb","Mar","Apr","May","Jun","Jul", "Aug","Sep","Oct","Nov","Dec"],
+                },
+            }
+            var chartProfileVisit = new ApexCharts(document.querySelector("#chart-profile-visit"), optionsProfileVisit);
+            chartProfileVisit.render();
+    
+        </script>
+    
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4></h4>
+                    </div>
                     <div class="card-body">
-                        Primary
-                        <div class="text-white-50 small">#4e73df</div>
+                        <div id="chart-profile-visit"></div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-6 mb-4">
-                <div class="card bg-success text-white shadow">
-                    <div class="card-body">
-                        Success
-                        <div class="text-white-50 small">#1cc88a</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 mb-4">
-                <div class="card bg-info text-white shadow">
-                    <div class="card-body">
-                        Info
-                        <div class="text-white-50 small">#36b9cc</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 mb-4">
-                <div class="card bg-warning text-white shadow">
-                    <div class="card-body">
-                        Warning
-                        <div class="text-white-50 small">#f6c23e</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 mb-4">
-                <div class="card bg-danger text-white shadow">
-                    <div class="card-body">
-                        Danger
-                        <div class="text-white-50 small">#e74a3b</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 mb-4">
-                <div class="card bg-secondary text-white shadow">
-                    <div class="card-body">
-                        Secondary
-                        <div class="text-white-50 small">#858796</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 mb-4">
-                <div class="card bg-light text-black shadow">
-                    <div class="card-body">
-                        Light
-                        <div class="text-black-50 small">#f8f9fc</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 mb-4">
-                <div class="card bg-dark text-white shadow">
-                    <div class="card-body">
-                        Dark
-                        <div class="text-white-50 small">#5a5c69</div>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-
-    </div>
-
-    <div class="col-lg-6 mb-4">
-
-        <!-- Illustrations -->
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary text-left">Today's Appointments</h6>
-                {{-- <p class="text-right">Right aligned text on all viewport sizes.</p> --}}
-            </div>
-            <div class="card-body">
-                <div class="text-center">
-                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
-                        src="img/undraw_posting_photo.svg" alt="...">
-                </div>
-                <p>You have {{$today->count()}} tppointment today</p>
-                {{-- <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on
-                    unDraw &rarr;</a> --}}
-            </div>
-            @if($today->count() > 0)
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Instagram</th>
-                                <th>Note</th>
-                                <th>IP</th>
-                                <th>Date</th>
-                                <th>Price</th>
-                                {{-- <th>Action</th> --}}
-                            </tr>
-                        </thead>
-                        {{-- <tfoot>
-                            <tr>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Age</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
-                            </tr>
-                        </tfoot> --}}
-                        <tbody>
-                            @foreach ($today as $ap)
-                            <tr>
-                                <td>{{$ap->name}}</td>
-                                <td>{{$ap->instagram}}</td>
-                                <td>{{$ap->note}}</td>
-                                <td>{{$ap->ip}}</td>
-                                <td>{{date('D', strtotime($ap->time)).' '.date("d/m/Y", strtotime(str_replace('-"', '/', $ap->time)))}}</td>
-                                <td>{{($ap->price)?'$'.$ap->price:'Price not avalible' }}</td>
-                                {{-- <td>
-                                    <a href="#" class="btn btn-info btn-circle btn-sm">
-                                        <i class="fas fa-info-circle"></i>
-                                    </a>                        
-                                </td> --}}
-
-                            </tr>
-                            @endforeach                                                                                                    
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            @endif
-        </div>
-
-        <!-- Approach -->
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Development Version</h6>
-            </div>
-            <div class="card-body">
-                <p>This is just for development purposes the project is not ready yet</p>
-                {{-- <p class="mb-0">Before working with this theme, you should become familiar with the
-                    Bootstrap framework, especially the utility classes.</p> --}}
             </div>
         </div>
-
-    </div>
+    </section>
 </div>
+
 @endsection
