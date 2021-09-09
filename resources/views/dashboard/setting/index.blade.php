@@ -1,6 +1,6 @@
-@extends('dashboard.layout.sideMenue')
+@extends('dashboard.layout.nav2')
 
-@section('section')
+@section('content')
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">Settings</h1>
     <div class="card shadow mb-4">
@@ -43,12 +43,12 @@
                     <small id="emailHelp" class="form-text text-muted">to chose more then one day press control on windows or command on mac os with the mouse click</small>
                 </div>   
                 <div class="col-md-12 text-right">
-                    <button type='button' class="btn btn-danger">
+                    <button type='button' class="btn btn-secondary">
                         <a style="color: #ffff" href="{{route('dashboard')}}">
                             Cancel
                         </a>
                     </button>
-                    <button type="submit" class="btn btn-info">Save</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
                 </div>             
               </form>
         </div>

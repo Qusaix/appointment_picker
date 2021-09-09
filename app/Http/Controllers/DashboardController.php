@@ -17,6 +17,7 @@ class DashboardController extends Controller
     {
         $appointments = Appointment::orderBy('created_at', 'desc')->get()->take(5);
         $today = Appointment::whereDate('created_at',Carbon::today())->orderBy('created_at','desc')->get();
+        $tomorrow = Appointment::orderBy('created_at','desc')->whereDate('time', Carbon::tomorrow())->paginate(10);
         $currentMonthEarnings = number_format(Appointment::where('status',1)->whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->month)->sum('price'),2);
         $annualEarnings = number_format(Appointment::where('status',1)->whereYear('created_at', Carbon::now()->year)->sum('price'),2);
         $pendingRequest = Appointment::where('price','=',null)->get()->count();
@@ -24,85 +25,98 @@ class DashboardController extends Controller
         $monthlySales = [];
         $todaAppointments = Appointment::orderBy('created_at','desc')->where('status',1)->whereDate('time', Carbon::today())->get();
         $todaAppointmentsEaring = number_format(Appointment::orderBy('created_at','desc')->where('status',1)->whereDate('time', Carbon::today())->sum('price'),2);
-
+        $tomorrowAppointmentsEaring = number_format(Appointment::orderBy('created_at','desc')->where('status',1)->whereDate('time', Carbon::tomorrow())->sum('price'),2);
+        $countAllAppointments = Appointment::get()->count();
         //monthlySales logic
         $year = Carbon::now()->year;
         $month = 1;
         $m1 = Appointment::whereYear('created_at', '=', $year)
         ->whereMonth('created_at', '=', $month)
         ->where('price','>',0)
+        ->where('status',1)
         ->sum('price');
         array_push($monthlySales,$m1);
         $month = 2;
         $m1 = Appointment::whereYear('created_at', '=', $year)
         ->whereMonth('created_at', '=', $month)
         ->where('price','>',0)
+        ->where('status',1)
         ->sum('price');
         array_push($monthlySales,$m1);
         $month = 3;
         $m1 = Appointment::whereYear('created_at', '=', $year)
         ->whereMonth('created_at', '=', $month)
         ->where('price','>',0)
+        ->where('status',1)
         ->sum('price');
         array_push($monthlySales,$m1);
         $month = 4;
         $m1 = Appointment::whereYear('created_at', '=', $year)
         ->whereMonth('created_at', '=', $month)
         ->where('price','>',0)
+        ->where('status',1)
         ->sum('price');
         array_push($monthlySales,$m1);
         $month = 5;
         $m1 = Appointment::whereYear('created_at', '=', $year)
         ->whereMonth('created_at', '=', $month)
         ->where('price','>',0)
+        ->where('status',1)
         ->sum('price');
         array_push($monthlySales,$m1);
         $month = 6;
         $m1 = Appointment::whereYear('created_at', '=', $year)
         ->whereMonth('created_at', '=', $month)
         ->where('price','>',0)
+        ->where('status',1)
         ->sum('price');
         array_push($monthlySales,$m1);
         $month = 7;
         $m1 = Appointment::whereYear('created_at', '=', $year)
         ->whereMonth('created_at', '=', $month)
         ->where('price','>',0)
+        ->where('status',1)
         ->sum('price');
         array_push($monthlySales,$m1);
         $month = 8;
         $m1 = Appointment::whereYear('created_at', '=', $year)
         ->whereMonth('created_at', '=', $month)
         ->where('price','>',0)
+        ->where('status',1)
         ->sum('price');
         array_push($monthlySales,$m1);
         $month = 9;
         $m1 = Appointment::whereYear('created_at', '=', $year)
         ->whereMonth('created_at', '=', $month)
         ->where('price','>',0)
+        ->where('status',1)
         ->sum('price');
         array_push($monthlySales,$m1);
         $month = 10;
         $m1 = Appointment::whereYear('created_at', '=', $year)
         ->whereMonth('created_at', '=', $month)
         ->where('price','>',0)
+        ->where('status',1)
         ->sum('price');
         array_push($monthlySales,$m1);
         $month = 11;
         $m1 = Appointment::whereYear('created_at', '=', $year)
         ->whereMonth('created_at', '=', $month)
         ->where('price','>',0)
+        ->where('status',1)
         ->sum('price');
         array_push($monthlySales,$m1);
         $month = 12;
         $m1 = Appointment::whereYear('created_at', '=', $year)
         ->whereMonth('created_at', '=', $month)
         ->where('price','>',0)
+        ->where('status',1)
         ->sum('price');
         array_push($monthlySales,$m1);
 
         
 
-        return view('dashboard.index',compact('appointments','today','monthlySales','currentMonthEarnings','annualEarnings','pendingRequest','todaAppointments','todaAppointmentsEaring'));
+        return view('dashboard.index',compact('appointments','today','monthlySales','currentMonthEarnings','annualEarnings','pendingRequest','todaAppointments','todaAppointmentsEaring','countAllAppointments','tomorrow','tomorrowAppointmentsEaring'));
     }
 
     public function export() 

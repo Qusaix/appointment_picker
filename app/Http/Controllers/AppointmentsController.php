@@ -21,12 +21,16 @@ class AppointmentsController extends Controller
         {
             $appointments = Appointment::orderBy('created_at','desc')->whereDate('time', Carbon::today())->paginate(10);
         }
-        elseif($filter == 2)
+        elseif($filter  == 2)
+        {
+            $appointments = Appointment::orderBy('created_at','desc')->whereDate('time', Carbon::tomorrow())->paginate(10);
+        }
+        elseif($filter == 3)
         {
             $appointments = Appointment::orderBy('created_at','desc')->whereBetween('time', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->paginate(10);
             
         }
-        elseif($filter == 3)
+        elseif($filter == 4)
         {
             $appointments = Appointment::orderBy('created_at','desc')->whereMonth('time', Carbon::now()->month)->paginate(10);
         }

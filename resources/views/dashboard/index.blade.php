@@ -142,7 +142,9 @@
                             <h4>Today's Appoinments</h4>
                             <h6 class="text-muted mb-0">Revenue: ${{$todaAppointmentsEaring}}</h6>
                         </div>
+                       
                         <div class="card-body">
+                            @if(count($todaAppointments) > 0)
                             <div class="table-responsive">
                                 <table class="table table-hover table-lg">
                                     <thead>
@@ -197,30 +199,64 @@
                                     </tbody>
                                 </table>
                             </div>
+                            @else
+                            <h6 class="text-muted mb-0">You have 0 appoinments today</h6>
+                            @endif
+                           
                         </div>
                     </div>
                 </div>
                 <div class="col-12 col-xl-6">
+
                     <div class="card">
                         <div class="card-header">
-                            <h4>Latest Appoinments</h4>
+                            <h4>Tomorrow's Appoinments</h4>
+                            <h6 class="text-muted mb-0">Revenue: ${{$tomorrowAppointmentsEaring}}</h6>
                         </div>
-                        <div class="card-content pb-4">
-                            @foreach ($appointments as $ap)
-                            <div class="recent-message d-flex px-4 py-3">
-                                <div class="avatar avatar-lg">
-                                    <img src="{{asset('assets1/images/faces/5.jpg')}}">
-                                </div>
-                                <div class="name ms-4">
-                                    <h5 class="mb-1"><a href="https://www.instagram.com/{{$ap->instagram}}">{{$ap->name}}</a></h5>
-                                    <h6 class="text-muted mb-0"><a href="{{route('dashboard.appointment.edit',$ap->id)}}">Show</a></h6>
-                                </div>
-                                
+                        <div class="card-body">
+                            @if(count($tomorrow) > 0)
+                            <div class="table-responsive">
+                                <table class="table table-hover table-lg">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Phone</th>
+                                            <th>Note</th>
+                                            <th>Price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            @foreach ($todaAppointments as $ap)
+                                                <td class="col-3">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="avatar avatar-md">
+                                                                {{-- <img src="{{asset('assets1/images/faces/5.jpg')}}"> --}}
+                                                                <p>
+                                                                    {{$ap->name}}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="col-auto">
+                                                        <p class=" mb-0">{{$ap->phone}}</p>
+                                                    </td>
+                                                    <td class="col-auto">
+                                                        <p class=" mb-0">{{$ap->note}}</p>
+                                                    </td>
+                                                    <td>
+                                                        <p>
+                                                            ${{$ap->price}}
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                    </tbody>
+                                </table>
                             </div>
-                            @endforeach
-                            <div class="px-4">
-                                <button class='btn btn-block btn-xl btn-light-primary font-bold mt-3'>See All</button>
-                            </div>
+                            @else
+                            <h6 class="text-muted mb-0">You have 0 appoinments tomorrow</h6>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -234,8 +270,8 @@
                             <img src="{{asset('assets1/images/faces/2.jpg')}}" alt="Face 1">
                         </div>
                         <div class="ms-3 name">
-                            <h5 class="font-bold">Salem sulibe</h5>
-                            <h6 class="text-muted mb-0">@salemsulibe</h6>
+                            {{-- <h5 class="font-bold">Welcome Admin</h5> --}}
+                            <h6 class="text-muted mb-0">You have {{$countAllAppointments}} appoinments on the website</h6>
                         </div>
                     </div>
                 </div>

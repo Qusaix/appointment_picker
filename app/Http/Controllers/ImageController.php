@@ -43,6 +43,7 @@ class ImageController extends Controller
         $image = Images::findOrFail($id);
         $image->link = $request->link;
         $image->save();
+        Alert::toast('Image was updated', 'success');
         return \redirect()->route('dashboard.images.index');
     }
 

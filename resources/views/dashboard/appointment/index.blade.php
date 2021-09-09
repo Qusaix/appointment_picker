@@ -16,7 +16,7 @@
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Appointment</li>
                         </ol>
                     </nav>
@@ -24,6 +24,25 @@
             </div>
         </div>
         <section class="section">
+            <div class="modal fade" id="DeleteingModal" tabindex="-1" role="dialog" aria-labelledby="DeleteingModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="DeleteingModalLabel">Deleteing Appointment</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      Are you sure you want to delete this appointment
+                    </div>
+                    <div class="modal-footer">
+                      <button onclick="hideDeleteModal()" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button onclick="deleteAppoinment()" type="button" class="btn btn-danger">Delete</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             <div class="card">
                 <div class="card-header">
                     <div class="col-sm-4 float-end">
@@ -46,12 +65,19 @@
                                 @if($filter == 1)
                                 Today <i class="bi bi-error-circle ml-50"></i>
                                 @endif
+
                                 @if($filter == 2)
+                                Tomorrow <i class="bi bi-error-circle ml-50"></i>
+                                @endif
+
+                                @if($filter == 3)
                                 This Week <i class="bi bi-error-circle ml-50"></i>
                                 @endif
-                                @if($filter == 3)
+
+                                @if($filter == 4)
                                 This Month
                                 @endif
+
                                 @if($filter == 'null')
                                 All <i class="bi bi-error-circle ml-50"></i>
                                 @endif
@@ -60,7 +86,7 @@
                                 All <i class="bi bi-error-circle ml-50"></i>
                                 @endif
 
-                                @if($filter&&$filter != 'null'&&$filter != 1&&$filter != 2&&$filter != 3)
+                                @if($filter&&$filter != 'null'&&$filter != 1&&$filter != 2&&$filter != 3&&$filter != 4)
                                 Search Results <i class="bi bi-error-circle ml-50"></i>
                                 @endif
 
@@ -74,19 +100,26 @@
                                 
                                 @if($filter == 1)
                                 <a style="background-color: #435ebe; color:#fff;" onclick="filterData(1)" class="dropdown-item justify-content-between" href="#">Today</a>
-
                                 @else
                                 <a onclick="filterData(1)" class="dropdown-item justify-content-between" href="#">Today</a>
-                                                                @endif
-                                @if($filter == 2)
-                                <a style="background-color: #435ebe; color:#fff;" onclick="filterData(2)" class="dropdown-item justify-content-between" href="#">This Week</a>
-                                @else
-                                <a onclick="filterData(2)" class="dropdown-item justify-content-between" href="#">This Week</a>
                                 @endif
-                                @if($filter == 3)
-                                <a style="background-color: #435ebe; color:#fff;" onclick="filterData(3)" class="dropdown-item justify-content-between" href="#">This Month</a>
+
+                                @if($filter == 2)
+                                <a style="background-color: #435ebe; color:#fff;" onclick="filterData(2)" class="dropdown-item justify-content-between" href="#">Tomorrow</a>
                                 @else
-                                <a onclick="filterData(3)" class="dropdown-item justify-content-between" href="#">This Month</a>
+                                <a onclick="filterData(2)" class="dropdown-item justify-content-between" href="#">Tomorrow</a>
+                                @endif
+
+                                @if($filter == 3)
+                                <a style="background-color: #435ebe; color:#fff;" onclick="filterData(3)" class="dropdown-item justify-content-between" href="#">This Week</a>
+                                @else
+                                <a onclick="filterData(3)" class="dropdown-item justify-content-between" href="#">This Week</a>
+                                @endif
+
+                                @if($filter == 4)
+                                <a style="background-color: #435ebe; color:#fff;" onclick="filterData(4)" class="dropdown-item justify-content-between" href="#">This Month</a>
+                                @else
+                                <a onclick="filterData(4)" class="dropdown-item justify-content-between" href="#">This Month</a>
                                 @endif
 
                             </div>
@@ -145,9 +178,9 @@
                                                                 <a href="{{route('dashboard.appointment.edit',$ap->id)}}" class="btn btn-info btn-circle btn-sm">
                                                                     <i class="bi bi-pencil-fill"></i>
                                                                 </a>
-                                                                <a href="{{route('dashboard.appointment.delete',$ap->id)}}" class="btn btn-danger btn-circle btn-sm">
+                                                                <button onclick="showDeleteAppoinmentModal({!! json_decode($ap->id) !!})" href="{{route('dashboard.appointment.delete',$ap->id)}}" class="btn btn-danger btn-circle btn-sm">
                                                                     <i class="bi bi-trash-fill"></i>
-                                                                </a>
+                                                                </button>
                                                             
                                                             </td>
                                                         </tr>
@@ -180,29 +213,32 @@
 
 
     <script type="text/javascript">
-        $(function () {
-          
-          var table = $('.table').DataTable({
-              processing: true,
-              serverSide: true,
-              ajax: "{{ route('dashboard.appointment.datatable',$filter) }}",
-              columns: [
-                  {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                  {data: 'name', name: 'name'},
-                  {data: 'time', name: 'time'},
-                  {data: 'phone', name: 'phone'},
-                  {data: 'ip', name: 'ip'},
-                  {data: 'note', name: 'note'},
-                  {data: 'price', name: 'price'},
-                  {data: 'created_at', name: 'created_at'},
-                  {data: 'status', name: 'status'},
-                  {data: 'action', name: 'action', orderable: false, searchable: false},
-              ]
-          });
-          
-          
-        });
+        let ap_id;
+ 
+        function showDeleteAppoinmentModal(id)
+        {
+            ap_id = id;
+            $('#DeleteingModal').modal('show');
+        }
+        function deleteAppoinment()
+        {
+            let sending_request = '{{ route("dashboard.appointment.delete",":id") }}';
+            sending_request = sending_request.replace(':id',ap_id);
+            $.ajax({
+                url:sending_request,
+                type:'GET',
+                dataType:'JSON',
+                success:function(res){},
+                error:function(res){}
+            })
+            location.reload()
+        }
+        function hideDeleteModal()
+        {
+            $('#DeleteingModal').modal('hide');
+        }
 
+        
         function filterData(value = null)
         {
             var select = document.getElementById('filterData');

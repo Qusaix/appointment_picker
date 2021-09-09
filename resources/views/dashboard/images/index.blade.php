@@ -18,7 +18,7 @@
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Images</li>
                         </ol>
                     </nav>
@@ -57,44 +57,44 @@
                 
                 </div>
             </div>
-            <div class="modal fade" id="DeleteingModal" tabindex="-1" role="dialog" aria-labelledby="DeleteingModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="DeleteingModalLabel">Deleteing Image</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
+                <div class="modal fade" id="DeleteingModal" tabindex="-1" role="dialog" aria-labelledby="DeleteingModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="DeleteingModalLabel">Deleteing Image</h5>
+                        {{-- <button  onclick="hideDeleteModal()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button> --}}
+                        </div>
+                        <div class="modal-body">
+                        Are you sure you want to delete this image
+                        </div>
+                        <div class="modal-footer">
+                        <button onclick="hideDeleteModal()" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button onclick="deleteImage()" type="button" class="btn btn-danger">Delete</button>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                      Are you sure you want to delete this image
                     </div>
-                    <div class="modal-footer">
-                      <button onclick="hideDeleteModal()" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button onclick="deleteImage()" type="button" class="btn btn-danger">Delete</button>
-                    </div>
-                  </div>
                 </div>
-              </div>
-              <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="EditModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="EditModalLabel">Edit Image</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
+                <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="EditModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="EditModalLabel">Edit Image</h5>
+                        {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button> --}}
+                        </div>
+                        <div class="modal-body">
+                        <input id='updatedLink' value="" class="form-control" type="text">
+                        </div>
+                        <div class="modal-footer">
+                        <button onclick="hideEditModal()" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button onclick="editImage()" type="button" class="btn btn-primary">Save changes</button>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                      <input id='updatedLink' value="" class="form-control" type="text">
                     </div>
-                    <div class="modal-footer">
-                      <button onclick="hideEditModal()" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button onclick="editImage()" type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                  </div>
                 </div>
-              </div>
               
     </section>
 
@@ -134,7 +134,6 @@
             $('#DeleteingModal').modal('hide')
         }
         function deleteImage(){
-            console.log('image id: ',imageID);
             let delete_image_id = imageID
             let sending_request = '{{ route("dashboard.images.delete",":id") }}';
             sending_request = sending_request.replace(':id',delete_image_id);
@@ -155,7 +154,6 @@
             document.getElementById('updatedLink').value = document.getElementById(imageId).value;
             let getImage = 'Image'+imageId
             imageID = document.getElementById(getImage).value
-            console.log('value: ',imageID)
             $('#EditModal').modal('show')
         }
         function hideEditModal(){
@@ -173,23 +171,20 @@
             else
             {
                 let edit_image_id = imageID
-                let sending_request = '{{ route("dashboard.images.edit",":id") }}';
+                let sending_request = '{{ route("dashboard.images.update",":id") }}';
                 sending_request = sending_request.replace(':id',edit_image_id);
 
                 $.ajax({
-                url: "{{route('dashboard.images.store')}}",
+                url: sending_request,
                 type: 'POST',
                 data: imageLink,
                 dataType: 'JSON',
                 success:function(res){
-                    var url = '{{ route("dashboard.images.index") }}';
-                    // url = url.replace(':id', value);
-                    window.location.href = url;
-
+                    // var url = '{{ route("dashboard.images.index") }}';
+                    // window.location.href = url;
                 },
                 error:function(res){}
                 })
-
                 location.reload();                    
 
             }

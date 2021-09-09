@@ -6,6 +6,7 @@ use App\Http\Requests\SettingRequest;
 use App\Models\Day;
 use App\Models\Settings;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class SettingController extends Controller
 {
@@ -38,7 +39,7 @@ class SettingController extends Controller
             $day->isOff = 1;
             $day->save();
         }
-
-        return redirect()->route('dashboard');
+        Alert::toast('Setting was updated', 'success');
+        return back();
     }
 }
