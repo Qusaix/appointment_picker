@@ -17,7 +17,7 @@ class DashboardController extends Controller
     {
         $appointments = Appointment::orderBy('created_at', 'desc')->get()->take(5);
         $today = Appointment::whereDate('created_at',Carbon::today())->orderBy('created_at','desc')->get();
-        $tomorrow = Appointment::orderBy('created_at','desc')->where('status',1)->whereDate('time', Carbon::tomorrow())->paginate(10);
+        $tomorrow = Appointment::orderBy('created_at','desc')->where('status',1)->whereDate('time', Carbon::tomorrow())->get();
         $currentMonthEarnings = number_format(Appointment::where('status',1)->whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->month)->sum('price'),2);
         $annualEarnings = number_format(Appointment::where('status',1)->whereYear('created_at', Carbon::now()->year)->sum('price'),2);
         $pendingRequest = Appointment::where('price','=',null)->get()->count();

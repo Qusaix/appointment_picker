@@ -227,7 +227,7 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            @foreach ($todaAppointments as $ap)
+                                            @foreach ($tomorrow as $ap)
                                                 <td class="col-3">
                                                         <div class="d-flex align-items-center">
                                                             <div class="avatar avatar-md">
