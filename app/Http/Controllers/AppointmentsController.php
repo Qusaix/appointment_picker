@@ -79,6 +79,7 @@ class AppointmentsController extends Controller
     {
         $appointment = Appointment::find($id);
         $appointment->price = $request->price;
+        $appointment->note = $request->note;
         $appointment->status = $request->status;
         $appointment->save();
         Alert::toast('Appointment was updated', 'success');
