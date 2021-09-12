@@ -22,7 +22,7 @@
             {{(old('note'))?old('note'):$appointment->note}}
         </p>
     </div>
-    <button style="width: 20%; margin-bottom:2%;" class="btn btn-primary" onclick="showEditNoteModal('{!! (old('note'))?old('note'):$appointment->note !!}')"><i class="bi bi-pencil-square"></i> Edit Note</button>
+    <button style="margin-bottom:2%;" class="btn btn-primary" onclick="showEditNoteModal('{!! (old('note'))?old('note'):$appointment->note !!}')"><i class="bi bi-pencil-square"></i> Edit Note</button>
         <form method="POST" action="{{route('dashboard.appointment.update',$appointment->id)}}">
             @csrf
             <div class="form-group">
