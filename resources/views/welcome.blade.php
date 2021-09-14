@@ -409,7 +409,14 @@
           @foreach ($images as $image)
           <div class="col-lg-4 col-md-6 portfolio-item filter-app">
             <div class="portfolio-wrap">
-              <img style="width:375px;height:562px;" loading="lazy" alt="{{$image->link}}" src="{{$image->link}}" class="img-fluid">
+              <img 
+              style="width:375px;height:562px;"
+              loading="lazy"
+              alt="{{$image->link}}"
+              src="{{$image->link}}"
+              class="img-fluid"
+              onerror="if (this.src != 'error.jpg') this.src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png';"
+              >
               <div class="portfolio-info">
                 <div class="portfolio-links">
                   <a href="{{$image->link}}" data-gall="portfolioGallery" class="venobox" title="App 1"><i class="bx bx-plus"></i></a>

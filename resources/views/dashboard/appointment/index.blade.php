@@ -59,7 +59,7 @@
                     </div>
                     <div class="col-sm-5 float-start">
                         <h6>Filter</h6>
-                        <span>Select the range of days you want to see the appoinments from</span>
+                        <span>Filter the data throw the date or status</span>
                         <div class="dropdown icon-right">
                             <button class="btn btn-primary dropdown-toggle me-1" type="button" id="dropdownMenuButtonIconRight" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 @if($filter == 1)
@@ -77,6 +77,15 @@
                                 @if($filter == 4)
                                 This Month
                                 @endif
+                                @if($filter == 5)
+                                Pending <i class="bi bi-error-circle ml-50"></i>
+                                @endif
+                                @if($filter == 6)
+                                Confirmed <i class="bi bi-error-circle ml-50"></i>
+                                @endif
+                                @if($filter == 7)
+                                Denied<i class="bi bi-error-circle ml-50"></i>
+                                @endif
 
                                 @if($filter == 'null')
                                 All <i class="bi bi-error-circle ml-50"></i>
@@ -86,12 +95,15 @@
                                 All <i class="bi bi-error-circle ml-50"></i>
                                 @endif
 
-                                @if($filter&&$filter != 'null'&&$filter != 1&&$filter != 2&&$filter != 3&&$filter != 4)
+                                @if($filter&&$filter != 'null'&&$filter != 1&&$filter != 2&&$filter != 3&&$filter != 4&&$filter != 5&&$filter != 6&&$filter != 7)
                                 Search Results <i class="bi bi-error-circle ml-50"></i>
                                 @endif
 
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonIconRight">
+                                <p style="margin-top: 2%; margin-left:5%;">
+                                    Date
+                                </p>
                                 @if($filter == 'null')
                                 <a style="background-color: #435ebe; color:#fff;" onclick="filterData()" class="dropdown-item justify-content-between" href="#">All</a>
                                 @else
@@ -121,6 +133,29 @@
                                 @else
                                 <a onclick="filterData(4)" class="dropdown-item justify-content-between" href="#">This Month</a>
                                 @endif
+
+                                <p style="margin-top: 2%; margin-left:5%;">
+                                    Status
+                                </p>
+                                <hr>
+                                @if($filter == 5)
+                                <a style="background-color: #435ebe; color:#fff;" onclick="filterData(5)" class="dropdown-item justify-content-between" href="#">Pending</a>
+                                @else
+                                <a onclick="filterData(5)" class="dropdown-item justify-content-between" href="#">Pending</a>
+                                @endif
+
+                                @if($filter == 6)
+                                <a style="background-color: #435ebe; color:#fff;" onclick="filterData(6)" class="dropdown-item justify-content-between" href="#">Confirmed</a>
+                                @else
+                                <a onclick="filterData(6)" class="dropdown-item justify-content-between" href="#">Confirmed</a>
+                                @endif
+
+                                @if($filter == 7)
+                                <a style="background-color: #435ebe; color:#fff;" onclick="filterData(7)" class="dropdown-item justify-content-between" href="#">Denied</a>
+                                @else
+                                <a onclick="filterData(7)" class="dropdown-item justify-content-between" href="#">Denied</a>
+                                @endif
+                                
 
                             </div>
                         </div>                 

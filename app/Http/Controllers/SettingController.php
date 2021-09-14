@@ -23,6 +23,13 @@ class SettingController extends Controller
         $setting->instagram = $request->instagram;
         $setting->facebook = $request->facebook;
         $setting->appointmentsRange = $request->appointmentsRange;
+        $setting->sat = $request->sat;
+        $setting->sun = $request->sun;
+        $setting->mon = $request->mon;
+        $setting->tu = $request->tu;
+        $setting->wed = $request->wed;
+        $setting->thu = $request->thu;
+        $setting->fri = $request->fri;
         $setting->save();
         $allDays = Day::get();
         // remove all the days off

@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\AppointmentImport;
 use App\Exports\AppointmentExport;
-
+use App\Models\Settings;
 
 
 class DashboardController extends Controller
@@ -16,6 +16,7 @@ class DashboardController extends Controller
     public function index()
     {
         $appointments = Appointment::orderBy('created_at', 'desc')->get()->take(5);
+        $max_appointments_per_day = Settings::get()[0];
         $today = Appointment::whereDate('created_at',Carbon::today())->orderBy('created_at','desc')->get();
         $tomorrow = Appointment::orderBy('created_at','desc')->where('status',1)->whereDate('time', Carbon::tomorrow())->get();
         $currentMonthEarnings = number_format(Appointment::where('status',1)->whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->month)->sum('price'),2);
@@ -116,7 +117,7 @@ class DashboardController extends Controller
 
         
 
-        return view('dashboard.index',compact('appointments','today','monthlySales','currentMonthEarnings','annualEarnings','pendingRequest','todaAppointments','todaAppointmentsEaring','countAllAppointments','tomorrow','tomorrowAppointmentsEaring'));
+        return view('dashboard.index',compact('appointments','today','monthlySales','currentMonthEarnings','annualEarnings','pendingRequest','todaAppointments','todaAppointmentsEaring','countAllAppointments','tomorrow','tomorrowAppointmentsEaring','max_appointments_per_day'));
     }
 
     public function export() 

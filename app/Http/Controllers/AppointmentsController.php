@@ -9,6 +9,7 @@ use App\Http\Requests\EditAppointmentsRequest;
 use Yajra\DataTables\Facades\DataTables;
 use Carbon\Carbon;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Models\Settings;
 
 
 class AppointmentsController extends Controller
@@ -34,6 +35,18 @@ class AppointmentsController extends Controller
         {
             $appointments = Appointment::orderBy('created_at','desc')->whereMonth('time', Carbon::now()->month)->paginate(10);
         }
+        elseif($filter == 5)
+        {
+            $appointments = Appointment::orderBy('created_at','desc')->where('status', null)->paginate(10);
+        }
+        elseif($filter == 6)
+        {
+            $appointments = Appointment::orderBy('created_at','desc')->where('status', 1 )->paginate(10);
+        }
+        elseif($filter == 7)
+        {
+            $appointments = Appointment::orderBy('created_at','desc')->where('status', 0)->paginate(10);
+        }
         elseif($filter != null&&$filter != 'null')
         {
             $appointments = Appointment::orderBy('created_at','desc')->where('name', 'LIKE', "%{$filter}%")
@@ -51,17 +64,92 @@ class AppointmentsController extends Controller
     public function store(AppointmentsRequest $request)
     {   
         $request->merge(['ip' => $request->getClientIp()]);
+        // $setttings = Settings::get()[0];
         $dayCheck = Appointment::where('time',$request->time)
         ->where('status',1)
         ->get()
         ->count();
-        if($dayCheck >= 4)
+        $max_appointments_per_day = Settings::get()[0];
+        
+        if(date('D', strtotime($request->time)) == 'Sun')
         {
-            return response()->json([
-                'err'=>'the day is full',
-                'status'=>202
-            ],202);
+            if($dayCheck >= $max_appointments_per_day->Sun)
+            {
+                return response()->json([
+                    'err'=>'the day is full',
+                    'status'=>202
+                ],202);
+            }
         }
+        elseif(date('D', strtotime($request->time)) == 'Mon')
+        {
+            if($dayCheck >= $max_appointments_per_day->Mon)
+            {
+                return response()->json([
+                    'err'=>'the day is full',
+                    'status'=>202
+                ],202);
+            }
+        }
+        elseif(date('D', strtotime($request->time)) == 'Tu')
+        {
+            if($dayCheck >= $max_appointments_per_day->Tu)
+            {
+                return response()->json([
+                    'err'=>'the day is full',
+                    'status'=>202
+                ],202);
+            }
+
+        }
+        elseif(date('D', strtotime($request->time)) == 'Wed')
+        {
+            if($dayCheck >= $max_appointments_per_day->Wed)
+            {
+                return response()->json([
+                    'err'=>'the day is full',
+                    'status'=>202
+                ],202);
+            }
+        }
+        elseif(date('D', strtotime($request->time)) == 'Thu')
+        {
+            if($dayCheck >= $max_appointments_per_day->Thu)
+            {
+                return response()->json([
+                    'err'=>'the day is full',
+                    'status'=>202
+                ],202);
+            }
+        }
+        elseif(date('D', strtotime($request->time)) == 'Fri')
+        {
+            if($dayCheck >= $max_appointments_per_day->Fri)
+            {
+                return response()->json([
+                    'err'=>'the day is full',
+                    'status'=>202
+                ],202);
+            }
+        }
+        elseif(date('D', strtotime($request->time)) == 'Sat')
+        {
+            if($dayCheck >= $max_appointments_per_day->Sat)
+            {
+                return response()->json([
+                    'err'=>'the day is full',
+                    'status'=>202
+                ],202);
+            }
+        }
+
+        // if($dayCheck >= $max_appointments_per_day->max)
+        // {
+        //     return response()->json([
+        //         'err'=>'the day is full',
+        //         'status'=>202
+        //     ],202);
+        // }
         Appointment::create($request->all());
         return response()->json([
             'msg'=>'appointment was created',
@@ -163,23 +251,91 @@ class AppointmentsController extends Controller
         ->where('status',1)
         ->get()
         ->count();
+        $max_appointments_per_day = Settings::get()[0];
 
-        if($dayCheck >= 4)
+        if(date('D', strtotime($request->time)) == 'Sun')
         {
-            return response()->json([
-                'err'=>'the day is full',
-                'status'=>202
-            ],202);
+            if($dayCheck >= $max_appointments_per_day->Sun)
+            {
+                return response()->json([
+                    'err'=>'the day is full',
+                    'status'=>202
+                ],202);
+            }
         }
-        else
+        elseif(date('D', strtotime($request->time)) == 'Mon')
         {
-            return response()->json([
-                'msg'=>'day is avalible',
-                'status'=>200
-            ],200);
+            if($dayCheck >= $max_appointments_per_day->Mon)
+            {
+                return response()->json([
+                    'err'=>'the day is full',
+                    'status'=>202
+                ],202);
+            }
+        }
+        elseif(date('D', strtotime($request->time)) == 'tu')
+        {
+            if($dayCheck >= $max_appointments_per_day->tu)
+            {
+                return response()->json([
+                    'err'=>'the day is full',
+                    'status'=>202
+                ],202);
+            }
 
         }
+        elseif(date('D', strtotime($request->time)) == 'Wed')
+        {
+            if($dayCheck >= $max_appointments_per_day->Wed)
+            {
+                return response()->json([
+                    'err'=>'the day is full',
+                    'status'=>202
+                ],202);
+            }
+        }
+        elseif(date('D', strtotime($request->time)) == 'Thu')
+        {
+            if($dayCheck >= $max_appointments_per_day->Thu)
+            {
+                return response()->json([
+                    'err'=>'the day is full',
+                    'status'=>202
+                ],202);
+            }
+        }
+        elseif(date('D', strtotime($request->time)) == 'Fri')
+        {
+            if($dayCheck >= $max_appointments_per_day->Fri)
+            {
+                return response()->json([
+                    'err'=>'the day is full',
+                    'status'=>202
+                ],202);
+            }
+        }
+        elseif(date('D', strtotime($request->time)) == 'Sat')
+        {
+            if($dayCheck >= $max_appointments_per_day->Sat)
+            {
+                return response()->json([
+                    'err'=>'the day is full',
+                    'status'=>202
+                ],202);
+            }
+        }
+        // else
+        // {
+        //     return response()->json([
+        //         'msg'=>'day is avalible',
+        //         'status'=>200
+        //     ],200);
 
+        // }
+        return response()->json([
+            'msg'=>'day is avalible',
+            'status'=>200
+        ],200);
 
     }
 }
