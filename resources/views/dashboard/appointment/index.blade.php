@@ -5,6 +5,12 @@
     {{-- <h1 class="h3 mb-4 text-gray-800">Appointment</h1> --}}
     {{-- <p class="mb-4">You have 50 appointment</a>.</p> --}}
 
+    <style>
+        input#dateFilter {
+    padding: 5px;
+}
+    </style>
+
     <!-- DataTales Example -->
     <div class="page-heading">
         <div class="page-title">
@@ -158,7 +164,16 @@
                                 
 
                             </div>
-                        </div>                 
+                        </div> 
+                        <hr>
+                        <h6>
+                            Date
+                        </h6>
+                        <input value="{{ ($date)?$date:'' }}" class="datepicker" data-date-format="mm/dd/yyyy" type="date" id="dateFilter" name="dateFilter">
+                        <button onclick="dateFilter()" class="btn btn-primary">
+                            Filter
+                        </button>
+
                     </div>
                 </div>
                 <div class="card-body">
@@ -289,6 +304,13 @@
             let sending_request = '{{ route("dashboard.appointment.index",":id") }}';
             sending_request = sending_request.replace(':id',search_value);
             window.location.href = sending_request;
+        }
+        function dateFilter()
+        {
+            let sending_request = '{{ route("dashboard.appointment.index",":id",":date") }}';
+            let date = document.getElementById('dateFilter').value;
+            sending_request = sending_request.replace(':id',8);
+            if(date) window.location.href = sending_request+'/'+date;
         }
       </script>
       

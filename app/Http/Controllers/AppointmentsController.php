@@ -15,7 +15,7 @@ use App\Models\Settings;
 class AppointmentsController extends Controller
 {
 
-    public function index($filter = null)
+    public function index($filter = null,$date = null)
     {
         $appointments = [];
         if($filter  == 1)
@@ -47,6 +47,10 @@ class AppointmentsController extends Controller
         {
             $appointments = Appointment::orderBy('created_at','desc')->where('status', 0)->paginate(10);
         }
+        elseif($filter == 8)
+        {
+            $appointments = Appointment::orderBy('created_at','desc')->whereDate('time', $date)->paginate(10);
+        }
         elseif($filter != null&&$filter != 'null')
         {
             $appointments = Appointment::orderBy('created_at','desc')->where('name', 'LIKE', "%{$filter}%")
@@ -59,7 +63,7 @@ class AppointmentsController extends Controller
         }
 
         // $appointments = Appointment::orderBy('created_at','desc')->paginate(10);
-        return view('dashboard.appointment.index',compact('filter','appointments'));
+        return view('dashboard.appointment.index',compact('filter','appointments','date'));
     }
     public function store(AppointmentsRequest $request)
     {   

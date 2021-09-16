@@ -24,7 +24,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function(){
     Route::post('logout',[LoginController::class,'logout'])->name('dashboad.logout');
     
     Route::prefix('appointment')->group(function(){
-        Route::get('index/{id?}',[AppointmentsController::class,'index'])->name('dashboard.appointment.index');
+        Route::get('index/{id?}/{date?}',[AppointmentsController::class,'index'])->name('dashboard.appointment.index');
         Route::get('edit/{id}',[AppointmentsController::class,'edit'])->name('dashboard.appointment.edit');
         Route::get('delete/{id}',[AppointmentsController::class,'delete'])->name('dashboard.appointment.delete');
         Route::post('update/{id}',[AppointmentsController::class,'update'])->name('dashboard.appointment.update');
