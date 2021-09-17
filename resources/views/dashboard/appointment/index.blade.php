@@ -92,6 +92,9 @@
                                 @if($filter == 7)
                                 Denied<i class="bi bi-error-circle ml-50"></i>
                                 @endif
+                                @if($filter == 8)
+                                Date Filtering<i class="bi bi-error-circle ml-50"></i>
+                                @endif
 
                                 @if($filter == 'null')
                                 All <i class="bi bi-error-circle ml-50"></i>
@@ -101,7 +104,7 @@
                                 All <i class="bi bi-error-circle ml-50"></i>
                                 @endif
 
-                                @if($filter&&$filter != 'null'&&$filter != 1&&$filter != 2&&$filter != 3&&$filter != 4&&$filter != 5&&$filter != 6&&$filter != 7)
+                                @if($filter&&$filter != 'null'&&$filter != 1&&$filter != 2&&$filter != 3&&$filter != 4&&$filter != 5&&$filter != 6&&$filter != 7&&$filter != 8)
                                 Search Results <i class="bi bi-error-circle ml-50"></i>
                                 @endif
 
