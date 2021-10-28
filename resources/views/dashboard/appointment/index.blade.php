@@ -309,7 +309,7 @@
                   </form>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" onclick="hideAddAppoinmentModal()" class="btn btn-secondary" data-dismiss="modal">Close</button>
                   <button onclick="addAppoinment()" type="button" class="btn btn-primary">Add</button>
                 </div>
               </div>
@@ -510,6 +510,10 @@
         function hideErrorModalMessage()
         {
             $('#ErrorModal').modal('hide');
+        }
+        function hideAddAppoinmentModal()
+        {
+          $('#addAppoinmentModal').modal('hide');
         }
       </script>
       
