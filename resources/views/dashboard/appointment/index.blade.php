@@ -61,7 +61,15 @@
                                 </div>
                             </div>
                             <button onclick="search()" class="btn btn-primary">Search</button>
-                       
+
+                            <div class="form-group position-relative mt-5">
+                                <h6>
+                                    Adding appoinment
+                                </h6>
+                                <button onclick="showAppoinmentModal()" class="btn btn-primary">
+                                    Add
+                                </button>
+                            </div>
                     </div>
                     <div class="col-sm-5 float-start">
                         <h6>Filter</h6>
@@ -179,6 +187,7 @@
 
                     </div>
                 </div>
+
                 <div class="card-body">
                     @if (count($appointments) > 0)
                         <div class="row" id="table-bordered">
@@ -262,6 +271,129 @@
             </div>
 
         </section>
+        <div class="modal fade" id="addAppoinmentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">New appointment</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form class="needs-validation">
+                    <div class="form-group">
+                      <label for="validationCustom05" class="col-form-label">Name:</label>
+                      <input type="text" class="form-control" id="name">
+                    </div>
+                    <div class="form-group">
+                      <label for="validationCustom05" class="col-form-label">Phone Number:</label>
+                      <input type="number" class="form-control" id="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Instagram: <small class="form-text text-muted">(Add the instagram tag ex:salemsulibe)</small></label>
+                        <input type="text" class="form-control" id="Instagram_input">
+                    </div>
+                    <div class="form-group">
+                      <label for="recipient-name" class="col-form-label">Price</label>
+                      <input type="number" class="form-control" id="price">
+                  </div>
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Details:  <small class="form-text text-muted">(Add the appointment details like where the pictures will be taken)</small></label>
+                      <textarea class="form-control" id="note"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Date:</label>
+                        <input class="datepicker" data-date-format="mm/dd/yyyy" type="date" id="appoinmentDate" name="dateFilter">
+                    </div>  
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button onclick="addAppoinment()" type="button" class="btn btn-primary">Add</button>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div data-backdrop="static" data-keyboard="false" class="modal" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Saveing the Appointment</h5>
+                </div>
+                <div class="modal-body text-center">
+                  <div class="spinner-grow text-primary" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                  <div class="spinner-grow text-secondary" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                  <div class="spinner-grow text-success" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                  <div class="spinner-grow text-danger" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                  <div class="spinner-grow text-warning" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                  <div class="spinner-grow text-info" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                  <div class="spinner-grow text-light" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                  <div class="spinner-grow text-dark" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="modal fade" id="FullDayModal" tabindex="-1" role="dialog" aria-labelledby="FullDayModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="FullDayModal">Error</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>
+                      The day is full please try another one 
+                  </p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" onclick="hideFulldayMessage()" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade" id="ErrorModal" tabindex="-1" role="dialog" aria-labelledby="FullDayModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="FullDayModal">Error</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>
+                      Please fill all the fields 
+                  </p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" onclick="hideErrorModalMessage()" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+    
     </div>
 
 
@@ -314,6 +446,70 @@
             let date = document.getElementById('dateFilter').value;
             sending_request = sending_request.replace(':id',8);
             if(date) window.location.href = sending_request+'/'+date;
+        }
+        function showAppoinmentModal()
+        {
+            $('#addAppoinmentModal').modal('show');
+        }
+        function addAppoinment()
+        {
+            /*** 
+                Add appoinment:
+                feilds: name / phone number / instagram user name / note
+            **/
+            console.log(document.getElementById('appoinmentDate').value);
+            let dataSaved = {
+            title:document.getElementById("name").value,
+            start:document.getElementById('appoinmentDate').value,
+            name:document.getElementById("name").value,
+            instagram:document.getElementById("Instagram_input").value,
+            time:document.getElementById('appoinmentDate').value,
+            phone:document.getElementById('phone').value,
+            AM:0,
+            note:document.getElementById("note").value,
+            status:1,
+            price:document.getElementById('price').value
+            // _token: token,
+        }
+        $.ajax({
+            url: "{{route('appointment.store')}}",
+            type: 'POST',
+            data: dataSaved,
+            dataType: 'JSON',
+            success: function (res) { 
+                    if(res.status == 202)
+                    {
+                      $('#loadingModal').modal('hide');
+                    //  $('#addAppoinmentModal').modal('hide');
+                      $('#FullDayModal').modal('show');
+                      return;
+                    }
+                    if(res.status == 201)
+                    {
+                        $('#loadingModal').modal('hide');
+                        document.getElementById("name").value = "";
+                        document.getElementById("Instagram_input").value = "";
+                        document.getElementById('phone').value = "";
+                        document.getElementById("note").value = "";
+                        $("textarea#note").val("");
+                        $('#addAppoinmentModal').modal('hide');
+                        window.location.reload();
+                    }
+            },
+            error: function(err){
+              $('#loadingModal').modal('hide');
+              $('#ErrorModal').modal('show');
+              $('#addAppoinmentModal').modal('show')
+            }
+        });
+        }
+        function hideFulldayMessage()
+        {
+            $('#FullDayModal').modal('hide');
+        }
+        function hideErrorModalMessage()
+        {
+            $('#ErrorModal').modal('hide');
         }
       </script>
       

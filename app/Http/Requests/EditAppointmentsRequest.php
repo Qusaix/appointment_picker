@@ -26,6 +26,7 @@ class EditAppointmentsRequest extends FormRequest
         return [
             'status' => 'required',
             'price'=> 'required',
+            'time'=> 'required',
             'note'=> 'required'
         ];
     }

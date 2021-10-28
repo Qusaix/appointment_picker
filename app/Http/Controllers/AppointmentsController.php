@@ -173,6 +173,7 @@ class AppointmentsController extends Controller
         $appointment->price = $request->price;
         $appointment->note = $request->note;
         $appointment->status = $request->status;
+        $appointment->time = $request->time;
         $appointment->save();
         Alert::toast('Appointment was updated', 'success');
         return redirect()->route('dashboard.appointment.index');

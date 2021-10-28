@@ -84,7 +84,11 @@
                       @endforeach
                     </select>
                     <small id="emailHelp" class="form-text text-muted">to chose more then one day press control on windows or command on mac os with the mouse click</small>
-                </div>   
+                </div>
+                <div class="form-group">
+                    <label>Remove all of days</label>
+                    <input type="checkbox" id="vehicle1" name="noDayOff" value="1">
+                </div>
                 <div class="col-md-12 text-right">
                     <button type='button' class="btn btn-secondary">
                         <a style="color: #ffff" href="{{route('dashboard')}}">

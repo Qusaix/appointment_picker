@@ -29,6 +29,7 @@ class AppointmentsRequest extends FormRequest
             'AM' => 'required',
             'phone' => 'required',
             'note' => 'required',
+            'price'=>'numeric'
         ];
     }
 }

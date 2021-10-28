@@ -39,12 +39,16 @@ class SettingController extends Controller
             $day->isOff = 0;
             $day->save();
         }
-        //make new off Days
-        foreach($request->daysOff as $d)
+        # if need to remove all days of
+        if(!$request->noDayOff)
         {
-            $day = Day::find($d);
-            $day->isOff = 1;
-            $day->save();
+            //make new off Days
+            foreach($request->daysOff as $d)
+            {
+                $day = Day::find($d);
+                $day->isOff = 1;
+                $day->save();
+            }
         }
         Alert::toast('Setting was updated', 'success');
         return back();

@@ -29,6 +29,10 @@
             <label for="exampleFormControlInput1">Price</label>
             <input value="{{ (old('price'))?old('price'):$appointment->price}}" min='0' name="price" type="number" class="form-control" id="exampleFormControlInput1" placeholder="10.00">
             </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Date</label>
+                <input value="{{ (old('dateFilter'))?old('dateFilter'):$appointment->time}}" class="datepicker" data-date-format="mm/dd/yyyy" type="date" id="appoinmentDate" name="time">
+            </div>    
             <input hidden type="text" name="note" id="note" value="{{ (old('note'))?old('note'):$appointment->note}}">
             <div class="form-group">
             <label for="exampleFormControlSelect1">Appointment</label>
